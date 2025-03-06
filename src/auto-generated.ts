@@ -1,43 +1,37 @@
-
+/* eslint-disable */
 const runTimeDependencies = {
     "externals": {
-        "@youwol/mkdocs-ts": "^0.6.2",
-        "@youwol/rx-vdom": "^1.0.1",
-        "@youwol/vsf-core": "^0.3.1",
-        "@youwol/webpm-client": "^3.0.0",
+        "@w3nest/webpm-client": "^0.1.4",
         "mathjax": "^3.1.4",
+        "mkdocs-ts": "^0.3.1",
+        "rx-vdom": "^0.1.3",
         "rxjs": "^7.5.6"
     },
     "includedInBundle": {}
 }
 const externals = {
-    "@youwol/mkdocs-ts": "window['@youwol/mkdocs-ts_APIv06']",
-    "@youwol/rx-vdom": "window['@youwol/rx-vdom_APIv1']",
-    "@youwol/vsf-core": "window['@youwol/vsf-core_APIv03']",
-    "@youwol/webpm-client": "window['@youwol/webpm-client_APIv3']",
+    "@w3nest/webpm-client": "window['@w3nest/webpm-client_APIv01']",
     "mathjax": "window['mathjax_APIv3']",
+    "mkdocs-ts": "window['mkdocs-ts_APIv03']",
+    "rx-vdom": "window['rx-vdom_APIv01']",
     "rxjs": "window['rxjs_APIv7']"
 }
 const exportedSymbols = {
-    "@youwol/mkdocs-ts": {
-        "apiKey": "06",
-        "exportedSymbol": "@youwol/mkdocs-ts"
-    },
-    "@youwol/rx-vdom": {
-        "apiKey": "1",
-        "exportedSymbol": "@youwol/rx-vdom"
-    },
-    "@youwol/vsf-core": {
-        "apiKey": "03",
-        "exportedSymbol": "@youwol/vsf-core"
-    },
-    "@youwol/webpm-client": {
-        "apiKey": "3",
-        "exportedSymbol": "@youwol/webpm-client"
+    "@w3nest/webpm-client": {
+        "apiKey": "01",
+        "exportedSymbol": "@w3nest/webpm-client"
     },
     "mathjax": {
         "apiKey": "3",
         "exportedSymbol": "mathjax"
+    },
+    "mkdocs-ts": {
+        "apiKey": "03",
+        "exportedSymbol": "mkdocs-ts"
+    },
+    "rx-vdom": {
+        "apiKey": "01",
+        "exportedSymbol": "rx-vdom"
     },
     "rxjs": {
         "apiKey": "7",
@@ -45,93 +39,119 @@ const exportedSymbols = {
     }
 }
 
-const mainEntry : {entryFile: string,loadDependencies:string[]} = {
+const mainEntry: { entryFile: string; loadDependencies: string[] } =
+    {
     "entryFile": "./main.ts",
     "loadDependencies": [
         "rxjs",
-        "@youwol/rx-vdom",
-        "@youwol/mkdocs-ts",
-        "@youwol/webpm-client",
-        "mathjax",
-        "@youwol/vsf-core"
+        "rx-vdom",
+        "mkdocs-ts",
+        "@w3nest/webpm-client",
+        "mathjax"
     ]
 }
 
-const secondaryEntries : {[k:string]:{entryFile: string, name: string, loadDependencies:string[]}}= {}
+const secondaryEntries: {
+    [k: string]: { entryFile: string; name: string; loadDependencies: string[] }
+} = {}
 
 const entries = {
-     '@youwol/gallery': './main.ts',
-    ...Object.values(secondaryEntries).reduce( (acc,e) => ({...acc, [`@youwol/gallery/${e.name}`]:e.entryFile}), {})
+    '@w3nest/gallery': './main.ts',
+    ...Object.values(secondaryEntries).reduce(
+        (acc, e) => ({ ...acc, [e.name]: e.entryFile }),
+        {},
+    ),
 }
 export const setup = {
-    name:'@youwol/gallery',
-        assetId:'QHlvdXdvbC9nYWxsZXJ5',
-    version:'0.1.0-wip',
-    shortDescription:"Youwol's gallery.",
-    developerDocumentation:'https://platform.youwol.com/applications/@youwol/cdn-explorer/latest?package=@youwol/gallery&tab=doc',
-    npmPackage:'https://www.npmjs.com/package/@youwol/gallery',
-    sourceGithub:'https://github.com/youwol/gallery',
-    userGuide:'https://l.youwol.com/doc/@youwol/gallery',
-    apiVersion:'01',
+    name: '@w3nest/gallery',
+    assetId: 'QHczbmVzdC9nYWxsZXJ5',
+    version: '0.1.0-wip',
+    webpmPath: '/api/assets-gateway/webpm/resources/QHczbmVzdC9nYWxsZXJ5/0.1.0-wip',
+    apiVersion: '01',
     runTimeDependencies,
     externals,
     exportedSymbols,
     entries,
     secondaryEntries,
-    getDependencySymbolExported: (module:string) => {
+    getDependencySymbolExported: (module: string) => {
         return `${exportedSymbols[module].exportedSymbol}_APIv${exportedSymbols[module].apiKey}`
     },
 
-    installMainModule: ({cdnClient, installParameters}:{
-        cdnClient:{install:(unknown) => Promise<WindowOrWorkerGlobalScope>},
+    installMainModule: ({
+        cdnClient,
+        installParameters,
+    }: {
+        cdnClient: {
+            install: (_: unknown) => Promise<WindowOrWorkerGlobalScope>
+        }
         installParameters?
     }) => {
         const parameters = installParameters || {}
         const scripts = parameters.scripts || []
         const modules = [
             ...(parameters.modules || []),
-            ...mainEntry.loadDependencies.map( d => `${d}#${runTimeDependencies.externals[d]}`)
+            ...mainEntry.loadDependencies.map(
+                (d) => `${d}#${runTimeDependencies.externals[d]}`,
+            ),
         ]
-        return cdnClient.install({
-            ...parameters,
-            modules,
-            scripts,
-        }).then(() => {
-            return window[`@youwol/gallery_APIv01`]
-        })
+        return cdnClient
+            .install({
+                ...parameters,
+                modules,
+                scripts,
+            })
+            .then(() => {
+                return window[`@w3nest/gallery_APIv01`]
+            })
     },
-    installAuxiliaryModule: ({name, cdnClient, installParameters}:{
-        name: string,
-        cdnClient:{install:(unknown) => Promise<WindowOrWorkerGlobalScope>},
+    installAuxiliaryModule: ({
+        name,
+        cdnClient,
+        installParameters,
+    }: {
+        name: string
+        cdnClient: {
+            install: (_: unknown) => Promise<WindowOrWorkerGlobalScope>
+        }
         installParameters?
     }) => {
         const entry = secondaryEntries[name]
-        if(!entry){
-            throw Error(`Can not find the secondary entry '${name}'. Referenced in template.py?`)
+        if (!entry) {
+            throw Error(
+                `Can not find the secondary entry '${name}'. Referenced in template.py?`,
+            )
         }
         const parameters = installParameters || {}
         const scripts = [
             ...(parameters.scripts || []),
-            `@youwol/gallery#0.1.0-wip~dist/@youwol/gallery/${entry.name}.js`
+            `@w3nest/gallery#0.1.0-wip~dist/${entry.name}.js`,
         ]
         const modules = [
             ...(parameters.modules || []),
-            ...entry.loadDependencies.map( d => `${d}#${runTimeDependencies.externals[d]}`)
+            ...entry.loadDependencies.map(
+                (d) => `${d}#${runTimeDependencies.externals[d]}`,
+            ),
         ]
-        return cdnClient.install({
-            ...parameters,
-            modules,
-            scripts,
-        }).then(() => {
-            return window[`@youwol/gallery/${entry.name}_APIv01`]
-        })
+        return cdnClient
+            .install({
+                ...parameters,
+                modules,
+                scripts,
+            })
+            .then(() => {
+                return window[`@w3nest/gallery_APIv01`][`${entry.name}`]
+            })
     },
-    getCdnDependencies(name?: string){
-        if(name && !secondaryEntries[name]){
-            throw Error(`Can not find the secondary entry '${name}'. Referenced in template.py?`)
+    getCdnDependencies(name?: string) {
+        if (name && !secondaryEntries[name]) {
+            throw Error(
+                `Can not find the secondary entry '${name}'. Referenced in template.py?`,
+            )
         }
-        const deps = name ? secondaryEntries[name].loadDependencies : mainEntry.loadDependencies
+        const deps = name
+            ? secondaryEntries[name].loadDependencies
+            : mainEntry.loadDependencies
 
-        return deps.map( d => `${d}#${runTimeDependencies.externals[d]}`)
-    }
+        return deps.map((d) => `${d}#${runTimeDependencies.externals[d]}`)
+    },
 }
