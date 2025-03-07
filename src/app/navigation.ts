@@ -1,9 +1,10 @@
-import { DefaultLayout, installNotebookModule, Navigation } from 'mkdocs-ts'
+import { DefaultLayout, Navigation } from 'mkdocs-ts'
 
-import { navigation as PresentationsNav } from './presentations'
+import { navigation as presentationsNav } from './presentations'
 import { navigation as VsFlowNav } from './vs-flow'
+import { navigation as sciencesNav } from './sciences'
+
 import { fromMd } from './config.markdown'
-import { notebookPage } from './config.notebook'
 
 export type AppNav = Navigation<
     DefaultLayout.NavLayout,
@@ -27,46 +28,8 @@ export const navigation: AppNav = {
     header: decorationHome,
     layout: fromMd('index.md'),
     routes: {
-        '/presentations': PresentationsNav,
-        '/sciences': {
-            name: 'Sciences',
-            header: {
-                icon: { tag: 'div', class: 'fas fa-atom' },
-            },
-            layout: fromMd('sciences.md'),
-            routes: {
-                '/quantum-chem': {
-                    name: 'Quantum Chemistry',
-                    layout: ({ router }) =>
-                        notebookPage('quantum-chem.md', router),
-                    routes: {
-                        '/utils': {
-                            name: 'Utilities',
-                            layout: {
-                                content: ({ router }) =>
-                                    notebookPage(
-                                        'quantum-chem.utils.md',
-                                        router,
-                                    ),
-                            },
-                        },
-                    },
-                },
-                '/tdse-1d': {
-                    name: 'Schrödinger 1D',
-                    layout: ({ router }) => notebookPage('tdse-1d.md', router),
-                    routes: {
-                        '/utils': {
-                            name: 'Utilities',
-                            layout: {
-                                content: ({ router }) =>
-                                    notebookPage('tdse-1d.utils.md', router),
-                            },
-                        },
-                    },
-                },
-            },
-        },
+        '/presentations': presentationsNav,
+        '/sciences': sciencesNav,
         '/vs-flow': VsFlowNav,
     },
 }
