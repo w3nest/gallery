@@ -19,6 +19,8 @@ export class ExtLink implements VirtualDOM<'a'> {
             'mkdocs-ts': '/apps/@mkdocs-ts/doc/latest',
             chartjs: 'https://www.chartjs.org/',
             three: 'https://threejs.org/',
+            pmp: 'https://www.pmp-library.org/',
+            webassembly: 'https://webassembly.org/',
             pyodide: 'https://pyodide.org/en/stable/',
             'pyodide-packages':
                 'https://pyodide.org/en/stable/usage/packages-in-pyodide.html',
@@ -27,6 +29,8 @@ export class ExtLink implements VirtualDOM<'a'> {
             'virtual-dom': '/apps/@rx-vdom/doc/latest?nav=/api.VirtualDOM',
             webpm: '/apps/@webpm-client/doc/latest',
             'floating-ui': 'https://floating-ui.com/',
+            reactivex: 'https://reactivex.io/',
+            rxjs: 'https://rxjs.dev/',
         }
         if (!(target in navs)) {
             return
@@ -99,6 +103,7 @@ export class CrossLink implements VirtualDOM<'a'> {
             presentations: '@nav/presentations',
             sciences: '@nav/sciences',
             'w3nest-pres': '@nav/presentations/w3nest',
+            'vs-flow': '@nav/vs-flow',
         }
         if (!(target in navs)) {
             return

@@ -24,7 +24,10 @@ features may be unavailable.
    A general introduction is provided <cross-link target="w3nest-pres">here</cross-link>.  
 
 *  🧪 **<cross-link target="sciences">Science Case Studies</cross-link>** – Real-world applications of W3Nest in 
-scientific studies.  
+   scientific studies.  
+
+*  🧩 **<cross-link target="vs-flow">VS-Flow</cross-link>** – Interactive use cases of the low code engine 
+   **@youwol/vs-flow**.
 
 ---
 
