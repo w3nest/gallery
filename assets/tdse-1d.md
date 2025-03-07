@@ -34,7 +34,9 @@ const pyPool = new WorkersPool({
     pool: { startAt: 1, stretchTo: 1 }
 })
 const { initChart, plot } = await load("/sciences/tdse-1d/utils")
-const pyPoolView = pyPool.view()
+const { WorkersPoolView } = await webpm.installViewsModule()
+
+const pyPoolView = new WorkersPoolView({ workersPool: pyPool  })
 display(pyPoolView)
 await pyPool.ready()
 

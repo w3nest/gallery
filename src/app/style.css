@@ -15,3 +15,62 @@ body {
     font-family: var(--font-family-base) !important;
     line-height: var(--line-height-base) !important;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+th,
+td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0077cc;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+tr:hover {
+    background-color: #e0f7fa;
+    transition: 0.3s;
+}
+
+
+
+.line {
+    fill: none;
+    stroke: blue;
+    stroke-width: 2;
+}
+
+.psi {
+    fill: rgba(70, 130, 180, 0.86);
+    stroke: steelblue;
+    stroke-width: 2;
+}
+
+.eigenstate {
+    fill: rgba(70, 130, 180, 0.1);
+    stroke: rgba(70, 130, 180, 0.3);
+    stroke-width: 2;
+}
+
+.classical {
+    radius: 10;
+    fill: #ff8a5f;
+    stroke: #fa4500
+}

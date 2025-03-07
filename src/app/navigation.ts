@@ -5,31 +5,11 @@ import {
     Navigation,
 } from 'mkdocs-ts'
 
-const url = (restOfPath: string) => `../assets/${restOfPath}`
+import { navigation as PresentationsNav } from './presentations'
+import { fromMd } from './config.markdown'
+import { notebookPage } from './config.notebook'
 
-const placeholders = {
-    '{{rx-vdom-doc-url}}': '/apps/@rx-vdom/doc/latest',
-    '{{rx-vdom-doc}}':
-        '<a target="_blank" href="/apps/@rx-vdom/doc/latest">rx-vdom</a>',
-}
-
-function fromMd(file: string) {
-    return fetchMd({
-        url: url(file),
-        placeholders,
-    })
-}
 const NotebookModule = await installNotebookModule()
-const notebookOptions = {
-    runAtStart: true,
-    defaultCellAttributes: {
-        lineNumbers: false,
-    },
-    markdown: {
-        latex: true,
-        placeholders,
-    },
-}
 
 export type AppNav = Navigation<
     DefaultLayout.NavLayout,
@@ -39,54 +19,45 @@ export type AppNav = Navigation<
 export const navigation: AppNav = {
     name: 'Home',
     header: {
-        icon: { tag: 'div', class: 'fas fa-home pe-1' },
+        icon: { tag: 'div', class: 'fas fa-home' },
     },
     layout: fromMd('index.md'),
     routes: {
+        '/presentations': PresentationsNav,
         '/sciences': {
             name: 'Sciences',
             header: {
-                icon: { tag: 'div', class: 'fas fa-atom pe-1' },
+                icon: { tag: 'div', class: 'fas fa-atom' },
             },
             layout: fromMd('sciences.md'),
             routes: {
                 '/quantum-chem': {
                     name: 'Quantum Chemistry',
                     layout: ({ router }) =>
-                        new NotebookModule.NotebookPage({
-                            url: url('quantum-chem.md'),
-                            router,
-                            options: notebookOptions,
-                        }),
+                        notebookPage('quantum-chem.md', router),
                     routes: {
                         '/utils': {
                             name: 'Utilities',
-                            layout: ({ router }) =>
-                                new NotebookModule.NotebookPage({
-                                    url: url('quantum-chem.utils.md'),
-                                    router,
-                                    options: notebookOptions,
-                                }),
+                            layout: {
+                                content: ({ router }) =>
+                                    notebookPage(
+                                        'quantum-chem.utils.md',
+                                        router,
+                                    ),
+                            },
                         },
                     },
                 },
                 '/tdse-1d': {
                     name: 'Schrödinger 1D',
-                    layout: ({ router }) =>
-                        new NotebookModule.NotebookPage({
-                            url: url('tdse-1d.md'),
-                            router,
-                            options: notebookOptions,
-                        }),
+                    layout: ({ router }) => notebookPage('tdse-1d.md', router),
                     routes: {
                         '/utils': {
                             name: 'Utilities',
-                            layout: ({ router }) =>
-                                new NotebookModule.NotebookPage({
-                                    url: url('tdse-1d.utils.md'),
-                                    router,
-                                    options: notebookOptions,
-                                }),
+                            layout: {
+                                content: ({ router }) =>
+                                    notebookPage('tdse-1d.utils.md', router),
+                            },
                         },
                     },
                 },
@@ -96,7 +67,7 @@ export const navigation: AppNav = {
     //   "/vs-flow": {
     //     name: "Visual Studio Flow",
     //     decoration: {
-    //       icon: { tag: "div", class: "fas fa-microchip pe-1" },
+    //       icon: { tag: "div", class: "fas fa-microchip" },
     //     },
     //     tableOfContent,
     //     html: fromMd("vs-flow.md"),
