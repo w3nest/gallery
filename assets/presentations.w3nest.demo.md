@@ -301,15 +301,6 @@ const input$ = dropdown.value$.pipe(
         V: grid.map(scenario.V)  
     }))  
 );  
-const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins:{
-        legend: {
-            display: false
-        }
-    }
-}
 display({
     tag: 'div',
     class:`border text-center rounded p-2 flex-grow-1 w-100 h-100`,

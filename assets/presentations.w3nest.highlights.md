@@ -3,8 +3,8 @@
 
 ---
 
-W3Nest provides essential features that **push the boundaries of web applications**.  
-Here are two standout examples:  
+W3Nest provides essential features that **push the boundaries of web applications**.
+Here are two standout examples.
 
 ---
 
@@ -28,7 +28,7 @@ A **powerful JavaScript library** that enhances **hierarchical document creation
 
 - 🔬 **Ideal for Scientific Publishing** – Ensures **full reproducibility** (code, data, and views).  
 
-- 📚 **Learn more in the** <ext-link target="mkdocs-ts">**MkDocs-TS documentation**</ext-link>.  
+- 📚 **Learn more** in the **<ext-link target="mkdocs-ts">MkDocs-TS documentation</ext-link>**.  
 
 ---
 
@@ -41,7 +41,10 @@ A **next-generation low-code engine** designed for **science and R&D application
    - Support dependencies on any **WebPM resource**, including **ESM modules & backends**.  
 
 - 🔄 **Advanced Data-Flow Management** –  
-   - Powered by the **Reactive-X paradigm** for robustness, concurrency, and modularity. 
+   - Powered by the **<ext-link target="reactivex">Reactive-X paradigm</ext-link>** for robustness, concurrency, 
+     and modularity. 
  
 - 🕹️ **3D Flow-Chart Visualization** –  
    - **Navigate & dive into** groups and macros in an intuitive 3D interface.  
+
+- 📚 **Learn more** in the **<cross-link target="vs-flow">VS-Flow</cross-link>** show-cases.  
