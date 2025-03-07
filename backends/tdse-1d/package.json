@@ -1,0 +1,8 @@
+{
+    "name": "w3gallery_tdse1d",
+    "version": "0.1.0",
+    "main": "dist/w3gallery_tdse1d-0.1.0-py3-none-any.whl",
+    "webpm": {
+        "type": "backend"
+    }
+}

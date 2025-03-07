@@ -3,9 +3,11 @@ node_modules
 dist/
 coverage/
 junit.xml
-cdn.zip
+webpm.zip
 __pycache__
 *.iml
 .template
-.env
+.venv
+deps
 /src/tests/**/result.zip
+*.egg-info

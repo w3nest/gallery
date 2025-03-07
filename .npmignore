@@ -2,4 +2,5 @@ coverage
 junit.xml
 dist/docs
 src/tests
-cdn.zip
+webpm.zip
+backends
