@@ -16,11 +16,21 @@ export type AppNav = Navigation<
     DefaultLayout.NavHeader
 >
 
-export const navigation: AppNav = {
-    name: 'Home',
-    header: {
-        icon: { tag: 'div', class: 'fas fa-home' },
+export const decorationHome = {
+    wrapperClass: `${DefaultLayout.NavHeaderView.DefaultWrapperClass} border-bottom p-1`,
+    icon: {
+        tag: 'img' as const,
+        style: {
+            width: '30px',
+            height: '30px',
+        },
+        src: '../assets/favicon.svg',
     },
+}
+
+export const navigation: AppNav = {
+    name: 'Gallery',
+    header: decorationHome,
     layout: fromMd('index.md'),
     routes: {
         '/presentations': PresentationsNav,

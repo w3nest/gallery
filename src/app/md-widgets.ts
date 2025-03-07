@@ -16,6 +16,7 @@ export class ExtLink implements VirtualDOM<'a'> {
             w3nest: '/apps/@w3nest/doc/latest',
             w3lab: '/w3lab',
             'w3nest-gallery': '/apps/@w3nest/gallery/latest',
+            'mkdocs-ts': '/apps/@mkdocs-ts/doc/latest',
             chartjs: 'https://www.chartjs.org/',
             three: 'https://threejs.org/',
             pyodide: 'https://pyodide.org/en/stable/',
@@ -59,6 +60,7 @@ export class GitHubLink implements VirtualDOM<'a'> {
             return
         }
         const navs = {
+            gallery: 'https://github.com/w3nest/gallery',
             'presentations.w3nest.demo.md':
                 'https://github.com/w3nest/gallery/blob/main/assets/presentations.w3nest.demo.md?raw=1',
             'mkdocs-ts': 'https://github.com/w3nest/mkdocs-ts',
@@ -94,6 +96,9 @@ export class CrossLink implements VirtualDOM<'a'> {
         }
         const navs = {
             'tdse-1d': '@nav/sciences/tdse-1d',
+            presentations: '@nav/presentations',
+            sciences: '@nav/sciences',
+            'w3nest-pres': '@nav/presentations/w3nest',
         }
         if (!(target in navs)) {
             return
