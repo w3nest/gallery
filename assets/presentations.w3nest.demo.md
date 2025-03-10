@@ -284,7 +284,7 @@ const numPoints = 500;
 
 const grid = Array.from({ length: numPoints }, (_, i) => i / (numPoints - 1));  
 
-let dropdown = new Views.DropDown({  
+const dropdown = new Views.DropDown({  
     items: {  
         harmonic: scenarios.harmonic,  
         gaussian: scenarios.gaussian,  
@@ -344,8 +344,8 @@ where:
 
 <js-cell reactive="true">
 
-const {V, scenario} = input$
-const { eigenStates } = await tdse1d.fetchJson('schrodinger/eigen-states', {
+let { V, scenario } = input$
+let { eigenStates } = await tdse1d.fetchJson('schrodinger/eigen-states', {
     method: 'post',
     body: JSON.stringify({
         basisSize: 50,
@@ -359,20 +359,21 @@ const computed$ = {
     scenario,
     V
 }
-const view = Views.Layouts.single({
-   content:{
-        tag:'div',
-        class: 'p-2 w-100 h-100 bg-light border rounded',
-        connectedCallback: (elem) => {            
-            const plot = init_plot({elem, eigenStates, V, grid})
+display(
+    Views.Layouts.single({
+        content:{
+            tag:'div',
+            class: 'p-2 w-100 h-100 bg-light border rounded',
+            connectedCallback: (elem) => {            
+                const plot = init_plot({elem, eigenStates, V, grid})
 
-            eigenStates
-            .filter( state => state.energy < plot.ePlotMax)
-            .forEach((state) => draw({ plot, state }))
+                eigenStates
+                .filter( state => state.energy < plot.ePlotMax)
+                .forEach((state) => draw({ plot, state }))
+            }
         }
-    }
-})
-display(view)
+    })
+)
 </js-cell>
 
 ## Time dependant results
@@ -391,7 +392,7 @@ $$
 
 
 <js-cell reactive="true">
-const { scenario, V, eigenStates } = computed$
+let { scenario, V, eigenStates } = computed$;
 const body = {
     method: 'post',
     body: JSON.stringify({
@@ -406,37 +407,37 @@ const body = {
 
 const resp = await tdse1d.fetchJson('schrodinger/tdse-1d', body)
 
-const view = Views.Layouts.superposed({
-    topLeft: dropdown,
-    content: {
-        tag:'div',
-        class: 'p-2 w-100 h-100 bg-light border rounded',
-        connectedCallback: (elem) => {
-            const plot = init_plot({elem, eigenStates, V, grid})
+display(
+    Views.Layouts.superposed({
+        topLeft: dropdown,
+        content: {
+            tag:'div',
+            class: 'p-2 w-100 h-100 bg-light border rounded',
+            connectedCallback: (elem) => {
+                const plot = init_plot({elem, eigenStates: eigenStates, V: V, grid})
 
-            eigenStates
-            .filter( state => state.energy < plot.ePlotMax)
-            .forEach((state) => draw({ plot, state }))
+                eigenStates
+                .filter( state => state.energy < plot.ePlotMax)
+                .forEach((state) => draw({ plot, state }))
 
-            let psiMax
-            const sub = rxjs.timer(0, 100).subscribe((i) => {
-                const index = i % (resp.quantumStates.length - 1)
-                const state = resp.quantumStates[index]
-                psiMax = psiMax || d3.max(state.pdf)
-                draw({ plot, state, update: true, coef: scenario.yScaleTDSE })
+                let psiMax
+                const sub = rxjs.timer(0, 100).subscribe((i) => {
+                    const index = i % (resp.quantumStates.length - 1)
+                    const state = resp.quantumStates[index]
+                    psiMax = psiMax || d3.max(state.pdf)
+                    draw({ plot, state, update: true, coef: scenario.yScaleTDSE })
 
-                const classical = resp.classicalStates[index]
-                plot.svg.select('.classical')
-                    .attr('cx', () => plot.xScale(classical.x))
-                    .attr('cy', () => plot.yScale(classical.energy))
-                    .attr('r', 5)
-            })
-            elem.ownSubscriptions(sub)
-        }
-    },
-})
-
-display(view)
+                    const classical = resp.classicalStates[index]
+                    plot.svg.select('.classical')
+                        .attr('cx', () => plot.xScale(classical.x))
+                        .attr('cy', () => plot.yScale(classical.energy))
+                        .attr('r', 5)
+                })
+                elem.ownSubscriptions(sub)
+            }
+        },
+    })
+)
 
 </js-cell>
 
