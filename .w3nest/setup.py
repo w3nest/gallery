@@ -21,8 +21,9 @@ pkg_json = parse_json(project_folder / "package.json")
 externals_deps = {
     "rxjs": "^7.5.6",
     "rx-vdom": "^0.1.3",
-    "mkdocs-ts": "^0.3.1",
-    "@w3nest/webpm-client": "^0.1.4",
+    "mkdocs-ts": "^0.4.2",
+    "@w3nest/webpm-client": "^0.1.7",
+    "@w3nest/ui-tk": "^0.1.2",
     "mathjax": "^3.1.4",
 }
 
@@ -42,7 +43,7 @@ config = ProjectConfig(
     ),
     bundles=Bundles(
         mainModule=MainModule(
-            entryFile="./main.ts", loadDependencies=list(externals_deps.keys())
+            entryFile="./app/main.ts", loadDependencies=list(externals_deps.keys())
         ),
     ),
     userGuide=True,
@@ -54,7 +55,6 @@ template_folder = Path(__file__).parent / ".template"
 generate_template(config=config, dst_folder=template_folder)
 
 files = [
-    Path("src") / "auto-generated.ts",
     "README.md",
     "package.json",
     "tsconfig.json",
