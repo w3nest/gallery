@@ -1,23 +1,10 @@
 # @w3nest/gallery
 
-Youwol's gallery.
+Discover Showcases on W3Nest
 
-This library is part of the hybrid cloud/local ecosystem
-[YouWol](https://platform.youwol.com/apps/@youwol/platform/latest).
+<!-- no links provided -->
 
-## Links
-
-[Running app.](https://platform.youwol.com/apps/@w3nest/gallery/latest)
-
-[Online user-guide](https://l.youwol.com/doc/@w3nest/gallery)
-
-[Developers documentation](https://platform.youwol.com/apps/@youwol/cdn-explorer/latest?package=@w3nest/gallery&tab=doc)
-
-[Package on npm](https://www.npmjs.com/package/@w3nest/gallery)
-
-[Source on GitHub](https://github.com/w3nest/gallery)
-
-# Installation, Build, Test
+## Installation, Build, Test
 
 To install the required dependencies:
 
@@ -49,7 +36,7 @@ To run tests:
 yarn test
 ```
 
-Coverage can be evaluated using:
+To measure test coverage:
 
 ```shell
 yarn test-coverage
@@ -57,40 +44,11 @@ yarn test-coverage
 
 ---
 
-To start the 'dev-server':
+To start the development server:
 
 ```shell
 yarn start
 ```
-
-In order to use the dev-server within Py-YouWol and to serve resources in place of the usual CDN database,
-the Py-YouWol configuration needs to be updated to include a `WebpackDevServerSwitch` within a
-`FlowSwitcherMiddleware`. For example:
-
-```python
-from w3nest.app.environment import *
-from w3nest.ci.ts_frontend import WebpackDevServerSwitch
-
-Configuration(
-    customization = Customization(
-        middlewares = [
-            FlowSwitcherMiddleware(
-                name = 'front-end dev-servers',
-                oneOf = [
-                    WebpackDevServerSwitch(packageName="@w3nest/gallery", port=3023),
-                ]
-            )
-        ]
-    )
-)
-```
-
-Additional information on the `Configuration` class can be found in the "Configuration API" page of the
-[Py-YouWol guide](https://l.youwol.com/doc/py-youwol).
-
-Once Py-YouWol is running with the updated configuration,
-the application can be accessed from [here](http://localhost:2000/apps/@w3nest/gallery/latest)
-(providing py-youwol running using the default port `2000`).
 
 ---
 

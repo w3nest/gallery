@@ -19,11 +19,12 @@ project_folder = Path(__file__).parent.parent
 pkg_json = parse_json(project_folder / "package.json")
 
 externals_deps = {
-    "rxjs": "^7.5.6",
-    "rx-vdom": "^0.1.3",
-    "mkdocs-ts": "^0.4.2",
-    "@w3nest/webpm-client": "^0.1.7",
-    "@w3nest/ui-tk": "^0.1.2",
+    "rxjs": "^7.8.2",
+    "rx-vdom": "^0.1.7",
+    "mkdocs-ts": "^0.5.3",
+    "@mkdocs-ts/notebook": "^0.1.5",
+    "@w3nest/webpm-client": "^0.1.12",
+    "@w3nest/ui-tk": "^0.1.8",
     "mathjax": "^3.1.4",
 }
 
@@ -43,10 +44,18 @@ config = ProjectConfig(
     ),
     bundles=Bundles(
         mainModule=MainModule(
-            entryFile="./app/main.ts", loadDependencies=list(externals_deps.keys())
+            entryFile="./app/main.ts",
+            loadDependencies=[
+                "rxjs",
+                "rx-vdom",
+                "mkdocs-ts",
+                "@mkdocs-ts/notebook",
+                "@w3nest/webpm-client",
+                "@w3nest/ui-tk",
+                "mathjax",
+            ],
         ),
     ),
-    userGuide=True,
     devServer=DevServer(port=3023),
 )
 
@@ -55,11 +64,13 @@ template_folder = Path(__file__).parent / ".template"
 generate_template(config=config, dst_folder=template_folder)
 
 files = [
+    ".gitignore",
     "README.md",
     "package.json",
     "tsconfig.json",
     "jest.config.ts",
     "webpack.config.ts",
+    "typedoc.js",
 ]
 for file in files:
     copyfile(src=template_folder / file, dst=project_folder / file)
