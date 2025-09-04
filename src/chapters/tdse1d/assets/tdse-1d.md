@@ -1,6 +1,7 @@
 # 1D Schrödinger Equation / *t*
 
-This page explains the resolution of the 1D Time-Dependent Schrödinger Equation (TDSE-1D) using numerical methods.
+This page describes how the one-dimensional Time-Dependent Schrödinger Equation (TDSE-1D) can be solved numerically. 
+To complement the text, an explanatory video can be found <ext-link target='tdse-1d.video'>here</ext-link>.
 
 The preview of the application in action is presented below, it is a deported view from the last cell of this page.
 

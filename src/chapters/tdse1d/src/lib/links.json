@@ -11,7 +11,8 @@
         "tdse-1d.d3js": "https://d3js.org/",
         "tdse-1d.pyodide": "https://pyodide.org/en/stable/",
         "tdse-1d.chartjs": "https://www.chartjs.org/",
-        "tdse-1d.rxjs": "https://rxjs.dev/"
+        "tdse-1d.rxjs": "https://rxjs.dev/",
+        "tdse-1d.video": "https://www.reddit.com/r/Physics/comments/o4u1ko/the_timedependent_schrodinger_equation_for"
     },
     "githubLinks": {
         "tdse-1d.repo":"https://github.com/w3nest/gallery/tree/main/src/chapters/tdse1d",
