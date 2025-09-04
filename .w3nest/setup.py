@@ -67,7 +67,7 @@ files = [
     ".gitignore",
     "README.md",
     "package.json",
-    "tsconfig.json",
+    # "tsconfig.json", ignore src/chapters
     "jest.config.ts",
     "webpack.config.ts",
     "typedoc.js",
