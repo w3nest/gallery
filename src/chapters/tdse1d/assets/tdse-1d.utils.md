@@ -4,7 +4,7 @@ This page gathers a couple utilities for plotting using the library <a target='_
 
 <js-cell>
 
-const initChart = (element, grid, V) => {
+const initChart = (element, grid, V, d3) => {
     const svg = d3.select(element)
         .append('svg')
         .attr('width', '100%')
@@ -55,8 +55,7 @@ const initChart = (element, grid, V) => {
 
 
 <js-cell>
-const plot = ({ chart, state, update, pdfScale, coef }) => {
-    
+const plot = ({ chart, state, update, pdfScale, coef, d3 }) => {
     const y0 = chart.yScale(state.energy)
     let line = d3
         .line()

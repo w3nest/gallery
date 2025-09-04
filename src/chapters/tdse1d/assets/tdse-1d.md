@@ -33,7 +33,7 @@ const pyPool = new WorkersPool({
     },
     pool: { startAt: 1, stretchTo: 1 }
 })
-const { initChart, plot } = await load("/sciences/tdse-1d/utils")
+const { initChart, plot } = await load("/tdse-1d/utils")
 const { WorkersPoolView } = await webpm.installViewsModule()
 
 const pyPoolView = new WorkersPoolView({ workersPool: pyPool  })
@@ -169,7 +169,7 @@ const scenariosEpot = {
         gaussianWell({ depth: 1e4, mean: 0.39, sigma: 0.1 })(x) +
         gaussianWell({ depth: 2e4, mean: 0.7, sigma: 0.1 })(x),
 }
-const dropDown = new Views.DropDown({items:scenariosEpot, selected:'harmonic'})
+const dropDown = new Views.Select({items:scenariosEpot, selected:'harmonic'})
 display(dropDown)
 const epot = dropDown.value$.pipe(
     rxjs.map( epotFct => grid.map(epotFct) )
@@ -207,12 +207,11 @@ const content = {
         {
             source$: eigen_resp,
             vdomMap: (resp) => {
-                console.log(resp)
                 return {
                     tag: 'div',
                     class: 'flex-grow-1 w-100',
                     connectedCallback: (element) => { 
-                        const chart = initChart(element, grid, resp.epot) 
+                        const chart = initChart(element, grid, resp.epot, d3) 
                         const pdf0Max = d3.max(resp.states[0].pdf)
                         const deltaE0 = chart.yScale(resp.states[1].energy) - chart.yScale(resp.states[0].energy)
                         const pdfScale = d3.scaleLinear().domain([0, pdf0Max]).range([0, deltaE0])
@@ -432,17 +431,16 @@ const content2 = {
                     tag: 'div',
                     class: 'flex-grow-1 w-100',
                     connectedCallback: (element) => { 
-                        const chart = initChart(element, grid, eigen_resp.epot) 
+                        const chart = initChart(element, grid, eigen_resp.epot, d3) 
                         const pdf0Max = d3.max(eigen_resp.states[0].pdf)
                         const deltaE0 = chart.yScale(eigen_resp.states[1].energy) - chart.yScale(eigen_resp.states[0].energy)
                         const pdfScale = d3.scaleLinear().domain([0, pdf0Max]).range([0, deltaE0])
                         eigen_resp.states.forEach((state) => {
                             if (state.energy < chart.Vmax) {
-                                plot({ chart, state, update: false, pdfScale, coef: 1 })
+                                plot({ chart, state, update: false, pdfScale, coef: 1, d3 })
                             }
                         })
-                        plot({ chart, state: state_resp, pdfScale, update: true, coef: 3 })
-
+                        plot({ chart, state: state_resp, pdfScale, update: true, coef: 3, d3 })
                     }
                 }
             }

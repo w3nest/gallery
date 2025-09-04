@@ -1,7 +1,14 @@
 import { fromMarkdown, GlobalMarkdownViews } from 'mkdocs-ts'
 import { CrossLink, ExtLink, GitHubLink } from './md-widgets'
+import { resolveUrlWithFP } from '@w3nest/webpm-client'
+import setup from '../../package.json'
 
-export const url = (restOfPath: string) => `../assets/${restOfPath}`
+export const url = (restOfPath: string) =>
+    resolveUrlWithFP({
+        package: setup.name,
+        version: setup.version,
+        path: `assets/${restOfPath}`,
+    })
 
 GlobalMarkdownViews.factory = {
     ...GlobalMarkdownViews.factory,
