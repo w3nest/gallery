@@ -47,8 +47,12 @@ export const navigation: AppNav = {
     header: decorationHome,
     layout: ({ router }) => new HomePage({ chapters, router }),
     routes: {
-        '/tdse-1d': chapters.tdse1D.navigation({
-            context: createRootContext({ threadName: 'tdse-1d' }),
-        }),
+        '/contribute': {
+            name: 'Contribute',
+            header: {
+                icon: { tag: 'i', class: 'fas fa-code-branch' },
+            },
+            layout: fromMd('contribute.md'),
+        },
     },
 }
