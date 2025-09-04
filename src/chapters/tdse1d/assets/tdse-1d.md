@@ -1,6 +1,15 @@
-# 1D Time-Dependent Schrödinger Equation (TDSE)
+# 1D Schrödinger Equation / *t*
 
-This page explains the resolution of the 1D Time-Dependent Schrödinger Equation using numerical methods.
+This page explains the resolution of the 1D Time-Dependent Schrödinger Equation (TDSE-1D) using numerical methods.
+
+The preview of the application in action is presented below, it is a deported view from the last cell of this page.
+
+<cell-output cell-id="final-view" full-screen="true" defaultClass="w-100">
+<div class="w-100 text-center border rounded p-2" style="aspect-ratio:1">
+    <i>This view will be updated when ready.</i>
+    <i class="fas fa-spinner fa-spin"></i>
+</div>
+</cell-output>
 
 ## Introduction
 
@@ -23,6 +32,17 @@ const { rxjs, d3 } = await webpm.install({
         'd3#^7.7.0 as d3'
     ]
 })
+const done$ = new rxjs.Subject()
+Views.notify({
+    content: {
+        tag: 'div',
+        class: 'p-3',
+        innerText: 'Installing Python Env. in Worker...'
+    },
+    level: 'info',
+    done$
+})
+
 const { WorkersPool } = await webpm.installWorkersPoolModule()
 const pyPool = new WorkersPool({
     install:{
@@ -39,7 +59,7 @@ const { WorkersPoolView } = await webpm.installViewsModule()
 const pyPoolView = new WorkersPoolView({ workersPool: pyPool  })
 display(pyPoolView)
 await pyPool.ready()
-
+done$.next(true)
 </js-cell>
 
 <note level="hint">
@@ -451,3 +471,6 @@ const content2 = {
 display(Views.Layouts.single({content:content2}))
 </js-cell>
 
+<js-cell cell-id="final-view">
+display(Views.Layouts.single({content:content2}))
+</js-cell>
