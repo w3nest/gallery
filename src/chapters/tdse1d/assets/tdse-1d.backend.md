@@ -7,7 +7,7 @@ using a **dedicated backend** that can be installed on your local machine when n
 For theoretical background and details on the numerical methods, please refer to the parent page.
 
 <note level="warning" title="Not available online"> 
-This page requires execution via the **{{w3nest}} local server**.
+This page requires execution via the <ext-link target="tdse-1d.w3nest">W3Nest</ext-link> local server.
 The server enables the installation and use of the custom backend required for these simulations.
 </note>
 
@@ -15,8 +15,9 @@ The server enables the installation and use of the custom backend required for t
 ## **Required Modules & Backend Installation**  
 
 The setup requires both frontend and backend components:
-*  **UI rendering and plotting** rely on two ESM modules: **rxjs**, **d3** and **chart.js**.
-*  Computation is handled by the backend package **w3gallery_tdse1d**.
+*  **UI rendering and plotting** rely on two ESM modules: <ext-link target="tdse-1d.d3js">D3</ext-link> 
+   and <ext-link target="tdse-1d.chartjs">Chart.js</ext-link> .
+*  Computation is handled by the backend package <github-link target="tdse-1d.backend">w3gallery_tdse1d</github-link>.
 
 
 <js-cell>  
@@ -50,13 +51,14 @@ const { chartJsPlot, init_plot, draw  } = await load("/tdse-1d/utils")
 
 </js-cell>  
 
-**Backend Service**
+<note level="info" title="Backend Spec." expandable="true">
 
 The backend is implemented as a **Python FastAPI service** and exposes two main endpoints:
 - **`schrodinger/eigen-states`** → Computes the system’s eigenstates.
 - **`schrodinger/tdse-1d`** → Simulates the time evolution of the wavefunction.  
 
 You can explore the HTTP API documentation here: 
+
 <js-cell>  
 display({
     tag:'a', 
@@ -66,7 +68,9 @@ display({
 })  
 </js-cell>  
 
-The backend's code API documentation is provided [here](@nav/tdse-1d/backend/api).
+The backend's code API documentation is provided <cross-link target="tdse-1d.backend.api">here</cross-link>.
+
+</note>
 
 ---
 

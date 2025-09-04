@@ -2,9 +2,9 @@
 
 This page collects **helper functions** for plotting quantum simulation results using either:
 
-* <a target='_blank' href='https://d3js.org/'>D3.js</a> — for direct SVG-based rendering of potentials, eigenstates, 
+* <ext-link target="tdse-1d.d3js">D3</ext-link> — for direct SVG-based rendering of potentials, eigenstates, 
   and time-dependent wavefunctions.
-* <a target='_blank' href='https://www.chartjs.org/'>Chart.js</a> — for simple, responsive line plotting.
+* <ext-link target="tdse-1d.chartjs">Chart.js</ext-link> — for simple, responsive line plotting.
 
 ⚠️ **Note**: There is some functional overlap between the utilities below. Both approaches implement potential plotting 
 and wavefunction visualization; a future refactor should unify them into a consistent API.

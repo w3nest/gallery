@@ -14,16 +14,18 @@ The preview of the application in action is presented below, it is a deported vi
 ## Introduction
 
 This page is powered by Python code running directly in your browser, made possible through 
-<a traget="_blank" href="https://pyodide.org/en/stable/">Pyodide</a>, 
+<ext-link target="tdse-1d.pyodide">Pyodide</ext-link>, 
 a Python distribution for the web. 
 To ensure the user interface remains responsive, computations are executed in a separate thread via a Web Worker.
+Note that the TDSE-1D resolution using a dedicated python backend service is described in 
+<cross-link target="tdse-1d.backend">this page</cross-link>.
 
-Visualization is handled using <a target='_blank' href='https://d3js.org/'>d3</a>, with plots generated dynamically 
-(for more details, visit the <a href="@nav/sciences/tdse-1d/utils">/Utilities</a>). 
-Additionally, animations and interactivity are managed using <a target="_blank" href="https://rxjs.dev/">RxJS</a>, 
+Visualization is handled using <ext-link target="tdse-1d.d3js">D3</ext-link>, with plots generated dynamically 
+(for more details, visit the <cross-link target="tdse-1d.utils">Utilities</cross-link> page). 
+Additionally, animations and interactivity are managed with <ext-link target="tdse-1d.rxjs">RxJS</ext-link>, 
 a library for reactive programming.
 
-The following cell installs the required dependencies.
+The following cell installs the required dependencies within a worker pool:
 
 <js-cell>
 const { rxjs, d3 } = await webpm.install({
@@ -470,6 +472,8 @@ const content2 = {
 
 display(Views.Layouts.single({content:content2}))
 </js-cell>
+
+The following cell simply displays the initial view inserted at the top of this page:
 
 <js-cell cell-id="final-view">
 display(Views.Layouts.single({content:content2}))
