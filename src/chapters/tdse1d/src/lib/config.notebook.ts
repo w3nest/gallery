@@ -1,6 +1,5 @@
-import { Router } from 'mkdocs-ts'
+import { ContextTrait, Router } from 'mkdocs-ts'
 import { NotebookPage } from '@mkdocs-ts/notebook'
-import { createRootContext } from './config.context'
 import { placeholders, url } from './config.markdown'
 
 export const notebookOptions = {
@@ -14,11 +13,11 @@ export const notebookOptions = {
     },
 }
 
-export const notebookPage = (target: string, router: Router) => {
-    const context = createRootContext({
-        threadName: `Notebook(${target})`,
-        labels: ['Notebook'],
-    })
+export const notebookPage = (
+    target: string,
+    router: Router,
+    context: ContextTrait,
+) => {
     return new NotebookPage(
         {
             url: url(target),
