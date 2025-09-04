@@ -45,7 +45,7 @@ setupGlobalLinks(Object.values(chapters))
 export const navigation: AppNav = {
     name: 'Gallery',
     header: decorationHome,
-    layout: fromMd('index.md'),
+    layout: ({ router }) => new HomePage({ chapters, router }),
     routes: {
         '/tdse-1d': chapters.tdse1D.navigation({
             context: createRootContext({ threadName: 'tdse-1d' }),
