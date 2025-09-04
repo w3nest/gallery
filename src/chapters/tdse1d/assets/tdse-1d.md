@@ -240,7 +240,7 @@ const content = {
                         const pdfScale = d3.scaleLinear().domain([0, pdf0Max]).range([0, deltaE0])
                         resp.states.forEach((state) => {
                             if (state.energy < chart.Vmax) {
-                                plot({ chart, state, update: false, pdfScale, coef: 1 })
+                                plot({ chart, state, update: false, pdfScale, coef: 1, d3 })
                             }
                         })
                     }
