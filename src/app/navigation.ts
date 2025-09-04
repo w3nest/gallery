@@ -1,19 +1,31 @@
-import { DefaultLayout, Navigation } from 'mkdocs-ts'
+import { ContextTrait, DefaultLayout, MdWidgets, Navigation } from 'mkdocs-ts'
 
 import { navigation as presentationsNav } from './presentations'
 import { navigation as VsFlowNav } from './vs-flow'
 import { navigation as sciencesNav } from './sciences'
 
-import { fromMd } from './config.markdown'
+import { fromMd, setupGlobalLinks } from './config.markdown'
 import { install } from '@w3nest/webpm-client'
+import { createRootContext } from './config.context'
 
 export type AppNav = Navigation<
     DefaultLayout.NavLayout,
     DefaultLayout.NavHeader
 >
-export type ChapterNav = () => Promise<AppNav>
+export type ChapterNav = ({
+    context,
+}: {
+    context: ContextTrait
+}) => Promise<AppNav>
+
 export type Chapter = {
     navigation: ChapterNav
+    links: {
+        extLinks: Record<string, string>
+        apiLinks: Record<string, string>
+        crossLinks: Record<string, string>
+        githubLinks: Record<string, string>
+    }
 }
 export const decorationHome = {
     wrapperClass: `${DefaultLayout.NavHeaderView.DefaultWrapperClass} border-bottom p-1`,
@@ -32,6 +44,8 @@ const chapters = await install<{ tdse1D: Chapter }>({
 })
 console.log('Chapters', chapters)
 
+setupGlobalLinks(Object.values(chapters))
+
 export const navigation: AppNav = {
     name: 'Gallery',
     header: decorationHome,
@@ -40,6 +54,8 @@ export const navigation: AppNav = {
         '/presentations': presentationsNav,
         '/sciences': sciencesNav,
         '/vs-flow': VsFlowNav,
-        '/tdse-1d': chapters.tdse1D.navigation(),
+        '/tdse-1d': chapters.tdse1D.navigation({
+            context: createRootContext({ threadName: 'tdse-1d' }),
+        }),
     },
 }

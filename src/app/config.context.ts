@@ -18,7 +18,7 @@ export function createRootContext({
     labels,
 }: {
     threadName: string
-    labels: Label[]
+    labels?: Label[]
 }): ContextTrait {
     //eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!DebugMode) {
@@ -27,7 +27,7 @@ export function createRootContext({
     return new Context({
         threadName,
         reporters,
-        labels,
+        labels: labels ?? [],
         callstack: [],
     })
 }

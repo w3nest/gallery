@@ -1,14 +1,7 @@
-import { fromMarkdown, GlobalMarkdownViews } from 'mkdocs-ts'
-import { CrossLink, ExtLink, GitHubLink } from './md-widgets'
+import { fromMarkdown, MdWidgets } from 'mkdocs-ts'
+import { Chapter } from './navigation'
 
 export const url = (restOfPath: string) => `../assets/${restOfPath}`
-
-GlobalMarkdownViews.factory = {
-    ...GlobalMarkdownViews.factory,
-    'ext-link': (elem: HTMLElement) => new ExtLink(elem),
-    'cross-link': (elem: HTMLElement) => new CrossLink(elem),
-    'github-link': (elem: HTMLElement) => new GitHubLink(elem),
-}
 
 export function fromMd(file: string) {
     return fromMarkdown({
@@ -17,8 +10,37 @@ export function fromMd(file: string) {
     })
 }
 
-export const placeholders = {
-    '{{rx-vdom-doc-url}}': '/apps/@rx-vdom/doc/latest',
-    '{{rx-vdom-doc}}':
-        '<a target="_blank" href="/apps/@rx-vdom/doc/latest">rx-vdom</a>',
+export const placeholders = {}
+
+export function setupGlobalLinks(chapters: Chapter[]) {
+    const links = Object.values(chapters).reduce(
+        (acc, e) => {
+            return {
+                extLinks: { ...acc.extLinks, ...e.links.extLinks },
+                apiLinks: { ...acc.apiLinks, ...e.links.apiLinks },
+                crossLinks: { ...acc.crossLinks, ...e.links.crossLinks },
+                githubLinks: { ...acc.githubLinks, ...e.links.githubLinks },
+            }
+        },
+        { extLinks: {}, apiLinks: {}, crossLinks: {}, githubLinks: {} },
+    )
+
+    MdWidgets.ApiLink.Mapper = (target: string) => {
+        return links.apiLinks[target] as ReturnType<MdWidgets.LinkMapper>
+    }
+    MdWidgets.ExtLink.Mapper = (target: string) => {
+        return {
+            href: links.extLinks[target] as string,
+        }
+    }
+    MdWidgets.GitHubLink.Mapper = (target: string) => {
+        return {
+            href: links.githubLinks[target] as string,
+        }
+    }
+    MdWidgets.CrossLink.Mapper = (target: string) => {
+        return {
+            href: links.crossLinks[target] as string,
+        }
+    }
 }

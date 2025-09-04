@@ -7,6 +7,9 @@ import { Footer } from '@w3nest/ui-tk/Mkdocs'
 
 export const router = new Router({
     navigation,
+    pathAliases: {
+        'tdse-1d': '@nav/tdse-1d',
+    },
 })
 
 export const topStickyPaddingMax = '3rem'
