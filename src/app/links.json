@@ -1,0 +1,13 @@
+{
+    "apiLinks": {
+    },
+    "crossLinks": {
+        "contribute":"@nav/contribute"
+    },
+    "extLinks": {
+        "w3nest": "/apps/@w3nest/doc/latest"
+    },
+    "githubLinks": {
+        "repo":"https://github.com/w3nest/gallery/tree/main"
+    }
+}

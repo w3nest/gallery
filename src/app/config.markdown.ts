@@ -1,5 +1,7 @@
 import { fromMarkdown, MdWidgets } from 'mkdocs-ts'
-import { Chapter } from './navigation'
+import { Chapter } from './chapters'
+import setup from '../../package.json'
+import linksMap from './links.json'
 
 export const url = (restOfPath: string) => `../assets/${restOfPath}`
 
@@ -10,20 +12,19 @@ export function fromMd(file: string) {
     })
 }
 
-export const placeholders = {}
+export const placeholders = {
+    '{{version}}': setup.version,
+}
 
 export function setupGlobalLinks(chapters: Chapter[]) {
-    const links = Object.values(chapters).reduce(
-        (acc, e) => {
-            return {
-                extLinks: { ...acc.extLinks, ...e.links.extLinks },
-                apiLinks: { ...acc.apiLinks, ...e.links.apiLinks },
-                crossLinks: { ...acc.crossLinks, ...e.links.crossLinks },
-                githubLinks: { ...acc.githubLinks, ...e.links.githubLinks },
-            }
-        },
-        { extLinks: {}, apiLinks: {}, crossLinks: {}, githubLinks: {} },
-    )
+    const links = Object.values(chapters).reduce((acc, e) => {
+        return {
+            extLinks: { ...acc.extLinks, ...e.links.extLinks },
+            apiLinks: { ...acc.apiLinks, ...e.links.apiLinks },
+            crossLinks: { ...acc.crossLinks, ...e.links.crossLinks },
+            githubLinks: { ...acc.githubLinks, ...e.links.githubLinks },
+        }
+    }, linksMap)
 
     MdWidgets.ApiLink.Mapper = (target: string) => {
         return links.apiLinks[target] as ReturnType<MdWidgets.LinkMapper>
