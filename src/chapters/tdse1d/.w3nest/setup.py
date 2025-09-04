@@ -27,7 +27,10 @@ externals_deps = {
 }
 
 in_bundle_deps = {}
-dev_deps = {}
+dev_deps = {
+    # only for types definition, it is installed dynamically
+    "@mkdocs-ts/code-api": "^0.2.3",
+}
 
 config = ProjectConfig(
     path=project_folder,
@@ -52,6 +55,11 @@ config = ProjectConfig(
             ],
         ),
     ),
+    inPackageJson={
+        "scripts": {
+            "doc": "(cd .w3nest && python doc.py)",
+        }
+    },
     devServer=DevServer(port=3023),
 )
 

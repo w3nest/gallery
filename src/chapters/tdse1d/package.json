@@ -24,7 +24,7 @@
         "lint-eslint-check": "eslint ./src",
         "test": "jest -i",
         "test-coverage": "jest -i --collect-coverage",
-        "doc": "typedoc",
+        "doc": "(cd .w3nest && python doc.py)",
         "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public"
     },
     "exports": {
@@ -51,6 +51,7 @@
         "rx-vdom": "^0.1.7"
     },
     "devDependencies": {
+        "@mkdocs-ts/code-api": "^0.2.3",
         "@types/jest": "^30.0.0",
         "@types/node": "^24.3.0",
         "@types/webpack": "^5.28.5",
@@ -91,20 +92,20 @@
         "main": "./lib/index.ts",
         "additionalEntries": {},
         "externals": {
-            "rx-vdom": [
-                "rx-vdom_APIv01"
-            ],
-            "@mkdocs-ts/notebook": [
-                "@mkdocs-ts/notebook_APIv01"
-            ],
             "mkdocs-ts": [
                 "mkdocs-ts_APIv05"
+            ],
+            "rx-vdom": [
+                "rx-vdom_APIv01"
             ],
             "@w3nest/webpm-client": [
                 "@w3nest/webpm-client_APIv01"
             ],
             "mathjax": [
                 "mathjax_APIv3"
+            ],
+            "@mkdocs-ts/notebook": [
+                "@mkdocs-ts/notebook_APIv01"
             ]
         }
     }
