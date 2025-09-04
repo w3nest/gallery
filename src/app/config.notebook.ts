@@ -1,8 +1,8 @@
-import { installNotebookModule, Router } from 'mkdocs-ts'
+import { Router } from 'mkdocs-ts'
+import { NotebookPage } from '@mkdocs-ts/notebook'
 import { createRootContext } from './config.context'
 import { placeholders, url } from './config.markdown'
 
-export const NotebookModule = await installNotebookModule()
 export const notebookOptions = {
     runAtStart: true,
     defaultCellAttributes: {
@@ -19,7 +19,7 @@ export const notebookPage = (target: string, router: Router) => {
         threadName: `Notebook(${target})`,
         labels: ['Notebook'],
     })
-    return new NotebookModule.NotebookPage(
+    return new NotebookPage(
         {
             url: url(target),
             router,

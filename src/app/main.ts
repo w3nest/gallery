@@ -10,14 +10,14 @@ const loadingScreen = new LoadingScreen({
 })
 
 const mkdocsVersion = pkgJson.webpm.dependencies['mkdocs-ts']
+const notebookVersion = pkgJson.webpm.dependencies['@mkdocs-ts/notebook']
 await install({
     esm: [`${pkgJson.name}#${pkgJson.version}`],
     css: [
         'bootstrap#5.3.3~bootstrap.min.css',
         'fontawesome#5.12.1~css/all.min.css',
         `mkdocs-ts#${mkdocsVersion}~assets/mkdocs-light.css`,
-        `mkdocs-ts#${mkdocsVersion}~assets/notebook.css`,
-        `mkdocs-ts#${mkdocsVersion}~assets/ts-typedoc.css`,
+        `@mkdocs-ts/notebook#${notebookVersion}~assets/notebook.css`,
     ],
     onEvent: (ev) => {
         loadingScreen.next(ev)
