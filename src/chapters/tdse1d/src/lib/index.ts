@@ -18,6 +18,14 @@ export const navigation: () => Promise<AppNav> = async () => {
         },
         layout: ({ router }) => notebookPage('tdse-1d.md', router),
         routes: {
+            '/backend': {
+                name: 'Using Backend',
+                header: {
+                    icon: { tag: 'i', class: 'fas fa-network-wired' },
+                },
+                layout: ({ router }) =>
+                    notebookPage('tdse-1d.backend.md', router),
+            },
             '/utils': {
                 name: 'Drawing Utils',
                 header: {
