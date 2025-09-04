@@ -4,12 +4,14 @@ import { Router, DefaultLayout } from 'mkdocs-ts'
 import { BehaviorSubject } from 'rxjs'
 import { AuthBadge } from '@w3nest/ui-tk/Badges'
 import { Footer } from '@w3nest/ui-tk/Mkdocs'
+import { chapterInputs } from './chapters'
 
 export const router = new Router({
     navigation,
-    pathAliases: {
-        'tdse-1d': '@nav/tdse-1d',
-    },
+    pathAliases: Object.keys(chapterInputs).reduce(
+        (acc, e) => ({ ...acc, [e]: `@nav/${e}` }),
+        {},
+    ),
 })
 
 export const topStickyPaddingMax = '3rem'
