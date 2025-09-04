@@ -1,8 +1,4 @@
-import { ContextTrait, DefaultLayout, MdWidgets, Navigation } from 'mkdocs-ts'
-
-import { navigation as presentationsNav } from './presentations'
-import { navigation as VsFlowNav } from './vs-flow'
-import { navigation as sciencesNav } from './sciences'
+import { ContextTrait, DefaultLayout, Navigation } from 'mkdocs-ts'
 
 import { fromMd, setupGlobalLinks } from './config.markdown'
 import { install } from '@w3nest/webpm-client'
@@ -51,9 +47,6 @@ export const navigation: AppNav = {
     header: decorationHome,
     layout: fromMd('index.md'),
     routes: {
-        '/presentations': presentationsNav,
-        '/sciences': sciencesNav,
-        '/vs-flow': VsFlowNav,
         '/tdse-1d': chapters.tdse1D.navigation({
             context: createRootContext({ threadName: 'tdse-1d' }),
         }),
