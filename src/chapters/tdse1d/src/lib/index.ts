@@ -5,6 +5,8 @@ import setup from '../../package.json'
 import { getUrlBase, install } from '@w3nest/webpm-client'
 import type * as CodeApiModule from '@mkdocs-ts/code-api'
 
+import LinksDict from './links.json'
+
 export type AppNav = Navigation<
     DefaultLayout.NavLayout,
     DefaultLayout.NavHeader
@@ -70,3 +72,5 @@ export const navigation = async ({ context }: { context: ContextTrait }) => {
         },
     } as AppNav
 }
+
+export const links = LinksDict

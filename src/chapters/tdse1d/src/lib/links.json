@@ -1,0 +1,20 @@
+{
+    "apiLinks": {
+    },
+    "crossLinks": {
+        "tdse-1d.backend":"@nav[tdse-1d]/backend",
+        "tdse-1d.backend.api":"@nav[tdse-1d]/backend/api",
+        "tdse-1d.utils":"@nav[tdse-1d]/utils"
+    },
+    "extLinks": {
+        "tdse-1d.w3nest": "/apps/@w3nest/doc/latest",
+        "tdse-1d.d3js": "https://d3js.org/",
+        "tdse-1d.pyodide": "https://pyodide.org/en/stable/",
+        "tdse-1d.chartjs": "https://www.chartjs.org/",
+        "tdse-1d.rxjs": "https://rxjs.dev/"
+    },
+    "githubLinks": {
+        "tdse-1d.repo":"https://github.com/w3nest/gallery/tree/main/src/chapters/tdse1d",
+        "tdse-1d.backend":"https://github.com/w3nest/gallery/tree/main/src/chapters/tdse1d/backends/tdse-1d/w3gallery_tdse1d"
+    }
+}
