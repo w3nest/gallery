@@ -25,7 +25,7 @@ def main():
     The w3nest server host and port should be provided as environment variables
     (using `HOST_NAME` and `HOST_PORT` respectively).
 
-    This function is used as the script `run_w3nest_demo_backend` entry point within the
+    This function is used as the script `run_w3gallery_tdse1d` entry point within the
     `project.toml` file.
     """
     start(

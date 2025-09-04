@@ -57,15 +57,12 @@ def compute_eigen(e_pot: FloatArray):
 class TDSESolver:
     """
     Solve the time dependant Schrodinger equation.
-
-    For explanation:
-    <a href=
-    "https://www.reddit.com/r/Physics/comments/o4u1ko/the_timedependent_schrodinger_equation_for"
-    target="_blank"></a>.
     """
 
     def __init__(self, psi_0: ComplexArray, e_pot: FloatArray, basis_size: int):
         """
+        Initialize a new instance.
+
         Parameters:
             psi_0: initial wave function on a regular grid.
             e_pot: Potential energy values on a regular grid (consistent with `psi_0`).

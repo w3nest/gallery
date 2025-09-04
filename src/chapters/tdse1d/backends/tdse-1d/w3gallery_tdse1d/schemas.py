@@ -22,7 +22,7 @@ class Gaussian(BaseModel):
 
 class EigenStatesBody(BaseModel):
     """
-    Body to the endpoint `/doc/quick-tour/eigen-states`.
+    Body to the endpoint `/schrodinger/eigen-states`.
     """
 
     ePot: list[float]
@@ -38,7 +38,7 @@ class EigenStatesBody(BaseModel):
 
 class TDSE1DBody(EigenStatesBody):
     """
-    Body to the endpoint `/schrodinger/tdse-1d``.
+    Body to the endpoint `/schrodinger/tdse-1d`.
     """
 
     tFinal: float
@@ -59,7 +59,7 @@ class TDSE1DBody(EigenStatesBody):
 
 class State(BaseModel):
     """
-    Body to the endpoint `/doc/quick-tour/compute`.
+    State representation.
     """
 
     pdf: list[float]

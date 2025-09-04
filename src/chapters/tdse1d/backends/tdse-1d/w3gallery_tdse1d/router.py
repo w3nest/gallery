@@ -34,7 +34,7 @@ The router object.
 @router.get("/")
 async def home():
     """
-    When proxied through py-youwol, this end point is always triggered when
+    When proxied through `w3nest`, this end point is always triggered when
     testing whether a backend is listening.
     """
     return Response(status_code=200)
@@ -58,9 +58,7 @@ async def eigen_states(
         Eigenstates and eigenvalues description.
     """
 
-    async with config.context(request).start(
-        action="/doc/quick-tour/eigen-states"
-    ) as ctx:
+    async with config.context(request).start(action="/schrodinger/eigen-states") as ctx:
         e_pot: FloatArray = np.array(body.ePot)
         eigen_values, eigen_vectors = compute_eigen(e_pot=e_pot)
         await ctx.info(f"Compute eigenstates up to {body.basisSize}")
@@ -90,7 +88,7 @@ async def tdse_1d(
         Simulation results.
     """
 
-    async with config.context(request).start(action="/doc/quick-tour/TDSE-1D") as ctx:
+    async with config.context(request).start(action="/schrodinger/tdse-1d") as ctx:
 
         solver = TDSESolver.create(body.ePot, body.psi0, body.basisSize)
         states = []
