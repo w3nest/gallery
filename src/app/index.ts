@@ -3,4 +3,4 @@
  *
  * @module Application
  */
-export * from './on-load'
+export * from './models'

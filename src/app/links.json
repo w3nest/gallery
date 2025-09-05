@@ -1,13 +1,21 @@
 {
     "apiLinks": {
+        "Chapter": { "href":"@nav/contribute/api.Chapter", 
+            "withClass": "mkapi-role-interface"}
     },
     "crossLinks": {
         "contribute":"@nav/contribute"
     },
     "extLinks": {
-        "w3nest": "/apps/@w3nest/doc/latest"
+        "w3lab": "http://localhost:2000/w3lab",
+        "w3nest": "/apps/@w3nest/doc/latest",
+        "mkdocs": "/apps/@mkdocs-ts/doc/latest",
+        "mkdocs.Navigation": "/apps/@mkdocs-ts/doc/latest?nav=/api/mkdocs-ts.Navigation",
+        "mkdocs.MdParsingOptions": "/apps/@mkdocs-ts/doc/latest?nav=/api/mkdocs-ts.MdParsingOptions",
+        "mkdocs.NotebookViewParameters": "/apps/@mkdocs-ts/doc/latest?nav=/api/notebook.NotebookViewParameters"
     },
     "githubLinks": {
-        "repo":"https://github.com/w3nest/gallery/tree/main"
+        "repo":"https://github.com/w3nest/gallery/tree/main",
+        "chapter-template":"https://github.com/w3nest/gallery/tree/main/chapters/template"
     }
 }

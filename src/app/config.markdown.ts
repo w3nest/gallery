@@ -1,7 +1,14 @@
 import { fromMarkdown, MdWidgets } from 'mkdocs-ts'
-import { Chapter } from './chapters'
+import { Chapter } from './models'
 import setup from '../../package.json'
 import linksMap from './links.json'
+import {
+    templateConfigMarkdownTs,
+    templateConfigNotebookTs,
+    templateIndexTs,
+    templateLinksTs,
+    templateSetupPy,
+} from './contribute-file-contents'
 
 export const url = (restOfPath: string) => `../assets/${restOfPath}`
 
@@ -14,6 +21,11 @@ export function fromMd(file: string) {
 
 export const placeholders = {
     '{{version}}': setup.version,
+    '{{templateSetupPy}}': templateSetupPy,
+    '{{templateIndexTs}}': templateIndexTs,
+    '{{templateConfigMarkdownTs}}': templateConfigMarkdownTs,
+    '{{templateConfigNotebookTs}}': templateConfigNotebookTs,
+    '{{templateLinksTs}}': templateLinksTs,
 }
 
 export function setupGlobalLinks(chapters: Chapter[]) {
