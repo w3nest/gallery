@@ -5,13 +5,14 @@
 
 --- 
 
-This is the starter project to start writing chapters contributing to `@w3nest/gallery` application.
+This project serves as the **starter template** for creating new chapters in the @w3nest/gallery application.
 
-It depicts the usual scenario of writing notebook like pages. 
-The project is very simple - it features a single page with source available 
+It demonstrates the common workflow of writing **notebook-like pages** in a minimal setup. 
+Out of the box, it provides a single example page, with the full source code available 
 <github-link target="{{navId}}.home.md">here</github-link>.
-To go beyond, refer to the documentation of `mkdocs-ts` 
-<ext-link target="{{navId}}.mkdocs-ts">here</ext-link>.
+
+To extend this template—adding more pages, features, or customizations—refer to the official 
+<ext-link target="{{navId}}.mkdocs-ts">mkdocs-ts documentation</ext-link>.
 
 Here is a **simple JavaScript cell**:
 
