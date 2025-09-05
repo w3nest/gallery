@@ -1,17 +1,21 @@
 import { render } from 'rx-vdom'
 import { navigation } from './navigation'
-import { Router, DefaultLayout } from 'mkdocs-ts'
+import { Router, DefaultLayout, PathAliasValue } from 'mkdocs-ts'
 import { BehaviorSubject } from 'rxjs'
 import { AuthBadge } from '@w3nest/ui-tk/Badges'
 import { Footer } from '@w3nest/ui-tk/Mkdocs'
 import { chapterInputs } from './chapters'
 
-export const router = new Router({
+export const router = new Router<
+    DefaultLayout.NavLayout,
+    DefaultLayout.NavHeader,
+    keyof typeof chapterInputs
+>({
     navigation,
     pathAliases: Object.keys(chapterInputs).reduce(
         (acc, e) => ({ ...acc, [e]: `@nav/${e}` }),
         {},
-    ),
+    ) as unknown as Record<keyof typeof chapterInputs, PathAliasValue>,
 })
 
 export const topStickyPaddingMax = '3rem'

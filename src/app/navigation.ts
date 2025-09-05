@@ -3,8 +3,7 @@ import { DefaultLayout } from 'mkdocs-ts'
 import { fromMd, setupGlobalLinks } from './config.markdown'
 import { createRootContext } from './config.context'
 import { HomePage } from './home-page'
-import { installChapters } from './chapters'
-import { AppNav } from '../../dist/src/app/navigation'
+import { AppNav, installChapters } from './chapters'
 
 export const decorationHome = {
     wrapperClass: `${DefaultLayout.NavHeaderView.DefaultWrapperClass} border-bottom p-1`,

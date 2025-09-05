@@ -10,7 +10,10 @@ export const chapterInputs = {
     'tdse-1d': '@w3gallery/tdse-1d#^0.1.0',
 }
 
-type AppNav = Navigation<DefaultLayout.NavLayout, DefaultLayout.NavHeader>
+export type AppNav = Navigation<
+    DefaultLayout.NavLayout,
+    DefaultLayout.NavHeader
+>
 
 export type ChapterNav = ({
     context,
