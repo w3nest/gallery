@@ -9,6 +9,7 @@
     "extLinks": {
         "w3lab": "http://localhost:2000/w3lab",
         "w3nest": "/apps/@w3nest/doc/latest",
+        "w3nest.server":"/apps/@w3nest/doc/latest/?nav=/quick-start",
         "mkdocs": "/apps/@mkdocs-ts/doc/latest",
         "mkdocs.Navigation": "/apps/@mkdocs-ts/doc/latest?nav=/api/mkdocs-ts.Navigation",
         "mkdocs.MdParsingOptions": "/apps/@mkdocs-ts/doc/latest?nav=/api/mkdocs-ts.MdParsingOptions",

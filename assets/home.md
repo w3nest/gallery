@@ -12,35 +12,34 @@ Most examples are presented as **notebooks**, but the same features can serve as
 <note level="warning" title="Backend Installation Required">  
 Some showcases require additional **backend services** injected into the W3Nest environment. 
 These examples cannot run directly online, they will only work when served from 
-the **local W3Nest server**. A clear warning is displayed at the beginning of such pages.  
+the <ext-link target='w3nest.server'>W3Nest server</ext-link>. A clear warning is displayed at the beginning of such pages.  
 </note>  
 
 
 ---
 
-### 🔍 **What’s Inside?**
+## 🧭 **Explore the Gallery**
 
-This gallery is just getting started — it currently features a **single chapter** as a first illustration 😅.
+This gallery is just getting started.
 
+👉 Want to help it grow?
+Check out the <cross-link target="contribute"></cross-link> page and learn how to create and share your own 
+interactive scientific showcase.
+
+You'll find below the available chapters.
 
 <!-- dynamically filled with each chapter’s abstract and title -->  
-<div id="chapters-abstract"></div>
+
+<div id="chapters-abstract"></div>  
 
 ---
 
-## Get involved 
-  
+## 🌟 Love what you're seeing?
 
-The W3Nest Gallery is open, extensible, and built for explorers — whether you’re prototyping in a notebook, 
-testing a showcase, or experimenting with W3Nest features.  
+* ⭐ Give us a star on <github-link target="repo">GitHub</github-link>.
+* 🐦 Share it with friends, colleagues, or on your favorite platform.
+* 💬 Feedback, ideas, or contributions are always welcome!
 
-Want to help the gallery grow?
-Check out the <cross-link target="contribute"></cross-link> page to learn how to create and share your own 
-interactive scientific showcase 🚀.  
-All showcases are implemented as standalone **ESM modules**, designed to be reused, adapted, and extended.  
+Every bit of support keeps the project growing — and helps remind us that we’re not building in the dark. 🙌
 
-* ⭐ Star us on <github-link target="repo">GitHub</github-link>  
-* 🐦 Share with friends, colleagues, or your favorite platform  
-* 💬 Feedback, ideas, and contributions are always welcome  
-
-Thank you for being part of the journey! 🌟
+Thank you for being part of the journey!

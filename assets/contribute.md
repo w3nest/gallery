@@ -2,7 +2,8 @@
 
 ---
 
-The **W3Nest Gallery** is meant to grow with the community. If you have an idea for an interactive scientific showcase, you can add it as a new **chapter** in this gallery.
+The **W3Nest Gallery** is meant to grow with the community. 
+If you have an idea for an interactive scientific showcase, you can add it as a new **chapter** in this gallery.
 
 You don’t need to be an expert — if you’ve built something interesting with W3Nest, we’d love to see it! 🚀
 
@@ -10,15 +11,11 @@ You don’t need to be an expert — if you’ve built something interesting wit
 
 ## 📂 Project Template
 
-Each chapter in the gallery is implemented as a standalone ESM module that follows the 
+Each chapter in the gallery is implemented as a standalone JavaScript module that follows the 
 <api-link target="Chapter"></api-link> API specification.
 It essentially defines a <ext-link target="mkdocs.Navigation">Navigation</ext-link> object 
 from the <ext-link target="mkdocs">mkdocs-ts</ext-link> library, which is mounted to the application.
 
-Each chapter in the gallery is implemented as a standalone module implementing the 
-API specification for the module is described by <api-link target="Chapter"></api-link>. 
-It essentially defines a <ext-link target="mkdocs.Navigation"></ext-link> object from the library 
-<ext-link target="mkdocs"></ext-link> that gets mounted to the application.
 
 To get started quickly, we provide a <github-link target="chapter-template">project template</github-link> 
 in the repository.
@@ -138,7 +135,7 @@ to avoid name clashes across different chapters.
 
 4. **Build Your Chapter**
 
-   * Start the local **W3Nest server**.
+   * Start the local <ext-link target="w3nest.server">W3Nest server</ext-link>.
    * Open the **W3Lab** application 
      (<ext-link target="w3lab">http://localhost:2000/w3lab</ext-link> if running on 
      port `2000`).
@@ -159,7 +156,7 @@ to avoid name clashes across different chapters.
    * After publishing a stable version, bump to the next *work-in-progress* (e.g. `0.1.1-wip`) for ongoing development.
      <note level="question" title="Why use `-wip`?" expandable="true">  
      Versions ending with `-wip` disable caching, ensuring the latest source is always retrieved when loading bundles.  
-     Only final versions should be published to the remote WebPM ecosystem.  
+     Ideally, only final versions should be published to the remote WebPM ecosystem.  
      </note>  
 
 7. **Submit Your Contribution**
