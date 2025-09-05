@@ -42,13 +42,21 @@ export class HomePage implements VirtualDOM<'div'> {
                                             nav,
                                             abstract,
                                         )
-                                        return new MdWidgets.NoteView({
-                                            level: 'info',
-                                            label: title,
-                                            icon: 'fas fa-book',
-                                            content: parseMd({ src: patched }),
-                                            expandable: true,
-                                        })
+                                        const abstractView =
+                                            new MdWidgets.NoteView({
+                                                level: 'info',
+                                                label: title,
+                                                icon: 'fas fa-book',
+                                                content: parseMd({
+                                                    src: patched,
+                                                }),
+                                                expandable: true,
+                                            })
+                                        return {
+                                            tag: 'div',
+                                            class: 'my-2',
+                                            children: [abstractView],
+                                        }
                                     },
                                 ),
                             }
