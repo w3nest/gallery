@@ -35,22 +35,11 @@ const { rxjs, d3 } = await webpm.install({
         'd3#^7.7.0 as d3'
     ]
 })
-const done$ = new rxjs.Subject()
-Views.notify({
-    content: {
-        tag: 'div',
-        class: 'p-3',
-        innerText: 'Installing Python Env. in Worker...'
-    },
-    level: 'info',
-    done$
-})
-
 const { WorkersPool } = await webpm.installWorkersPoolModule()
 const pyPool = new WorkersPool({
     install:{
         pyodide: {
-            version: "0.26.2",
+            version: "0.27.7",
             modules: ["numpy"]
         }
     },
@@ -61,6 +50,21 @@ const { WorkersPoolView } = await webpm.installViewsModule()
 
 const pyPoolView = new WorkersPoolView({ workersPool: pyPool  })
 display(pyPoolView)
+
+const done$ = new rxjs.Subject()
+Views.notify({
+    content: {
+        tag: 'div',
+        class: 'p-3',
+        children:[
+            { tag: 'div', innerText: 'Setup python runtime in Worker.'},
+            pyPoolView
+        ]        
+    },
+    level: 'info',
+    done$
+})
+
 await pyPool.ready()
 done$.next(true)
 </js-cell>
@@ -434,7 +438,7 @@ state_resp = {
     "pdf": pdf,
     "energy": energy
 }
-print("Computed in ", time.time() - t0)
+# print("Computed in ", time.time() - t0)
 </worker-cell>
 
 The `state_resp` variable is finally captured as output (it emits new value each time the `inputs` variable is updated),
