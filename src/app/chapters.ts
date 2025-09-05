@@ -39,9 +39,9 @@ type ChapterModules = {
     [K in keyof typeof chapterInputs]: Chapter
 }
 
-export async function installChapters(): Promise<
-    (Chapter & { nav: string })[]
-> {
+export type InstalledChapter = Chapter & { nav: string }
+
+export async function installChapters(): Promise<InstalledChapter[]> {
     const esm = Object.entries(chapterInputs).map(([nav, spec]) => {
         return `${spec} as ${nav}`
     })
