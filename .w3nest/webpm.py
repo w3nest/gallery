@@ -20,7 +20,7 @@ Package(
         artifacts=["dist"],
     ),
     metadata=Metadata(
-        icon="/assets/favicon.svg",
+        icon="/assets/favicon.png",
         description=pkg_json["description"],
         readme="/README.md",
         license=pkg_json.get("license", None),

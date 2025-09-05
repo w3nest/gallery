@@ -39,7 +39,7 @@ document.body.appendChild(
             router,
             topBanner: {
                 logo: {
-                    icon: '../assets/favicon.svg',
+                    icon: '../assets/favicon.png',
                     title: 'Gallery',
                 },
                 expandedContent: new DefaultLayout.BookmarksView({

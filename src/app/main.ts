@@ -6,7 +6,7 @@ import pkgJson from '../../package.json'
 const loadingScreen = new LoadingScreen({
     name: pkgJson.name,
     description: pkgJson.description,
-    logo: '../assets/favicon.svg',
+    logo: '../assets/favicon.png',
 })
 
 const mkdocsVersion = pkgJson.webpm.dependencies['mkdocs-ts']

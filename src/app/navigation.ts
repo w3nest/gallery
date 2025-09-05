@@ -16,7 +16,7 @@ export const decorationHome = {
             width: '30px',
             height: '30px',
         },
-        src: '../assets/favicon.svg',
+        src: '../assets/favicon.png',
     },
 }
 
