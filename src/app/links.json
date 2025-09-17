@@ -17,6 +17,6 @@
     },
     "githubLinks": {
         "repo":"https://github.com/w3nest/gallery/tree/main",
-        "chapter-template":"https://github.com/w3nest/gallery/tree/main/chapters/template"
+        "chapter-template":"https://github.com/w3nest/gallery/tree/main/src/chapters/template"
     }
 }
