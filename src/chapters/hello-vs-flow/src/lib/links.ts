@@ -1,6 +1,6 @@
 import setup from '../../package.json'
 
-export const navId = setup.name.split('/')[0]
+export const navId = setup.name.split('/').slice(-1)[0]
 /**
  * Links are referenced in the Markdown source like:
  *
@@ -21,19 +21,16 @@ export const links = {
         // 🔗 Cross-links: jump to other pages within the same gallery instance
         // Example: for a sub-page mounted at '/sub-page' under chapter 'template',
         // the key is 'template.sub-page', and the value points to its nav ID.
-        [`${navId}.sub-page`]: `@nav[${navId}]/backend`,
+        //[`${navId}.sub-page`]: `@nav[${navId}]/backend`,
     },
     extLinks: {
         // 🌍 External links: reference third-party sites, libraries, or docs
-        [`${navId}.mkdocs-ts`]: '/apps/@w3nest/doc/latest',
-        [`${navId}.reactivex`]: 'https://reactivex.io/',
+        //[`${navId}.mkdocs-ts`]: '/apps/@w3nest/doc/latest',
     },
     githubLinks: {
         // 🐙 GitHub links: direct references to source files for this chapter
         // Useful for contributors to quickly find where content lives.
-        [`${navId}.repo`]:
-            'https://github.com/w3nest/gallery/tree/main/src/chapters/template',
-        [`${navId}.home.md`]:
-            'https://github.com/w3nest/gallery/tree/main/src/chapters/template/assets/home.md',
+        // [`${navId}.repo`]:
+        //     'https://github.com/w3nest/gallery/tree/main/src/chapters/template',
     },
 }

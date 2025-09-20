@@ -35,7 +35,11 @@
                 "dependencies": [
                     "@w3nest/webpm-client",
                     "mkdocs-ts",
-                    "@mkdocs-ts/notebook"
+                    "@mkdocs-ts/notebook",
+                    "rxjs",
+                    "rx-vdom",
+                    "@vs-flow/core",
+                    "@vs-flow/flowchart-3d"
                 ],
                 "aliases": []
             }
@@ -43,8 +47,12 @@
     },
     "dependencies": {
         "@mkdocs-ts/notebook": "^0.1.5",
+        "@vs-flow/core": "^0.4.0",
+        "@vs-flow/flowchart-3d": "^0.4.0",
         "@w3nest/webpm-client": "^0.1.12",
-        "mkdocs-ts": "^0.5.3"
+        "mkdocs-ts": "^0.5.3",
+        "rx-vdom": "^0.1.8",
+        "rxjs": "^7.8.2"
     },
     "devDependencies": {
         "@types/jest": "^30.0.0",
@@ -75,8 +83,12 @@
         "kind": "esm",
         "dependencies": {
             "@mkdocs-ts/notebook": "^0.1.5",
+            "@vs-flow/core": "^0.4.0",
+            "@vs-flow/flowchart-3d": "^0.4.0",
             "@w3nest/webpm-client": "^0.1.12",
-            "mkdocs-ts": "^0.5.3"
+            "mkdocs-ts": "^0.5.3",
+            "rx-vdom": "^0.1.8",
+            "rxjs": "^7.8.2"
         }
     },
     "webpack": {
@@ -88,11 +100,23 @@
             "@mkdocs-ts/notebook": [
                 "@mkdocs-ts/notebook_APIv01"
             ],
+            "@vs-flow/core": [
+                "@vs-flow/core_APIv04"
+            ],
+            "@vs-flow/flowchart-3d": [
+                "@vs-flow/flowchart-3d_APIv04"
+            ],
             "@w3nest/webpm-client": [
                 "@w3nest/webpm-client_APIv01"
             ],
             "mkdocs-ts": [
                 "mkdocs-ts_APIv05"
+            ],
+            "rx-vdom": [
+                "rx-vdom_APIv01"
+            ],
+            "rxjs": [
+                "rxjs_APIv7"
             ]
         }
     }

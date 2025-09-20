@@ -16,24 +16,21 @@ export const navigation = async ({
     mountPath: string
 }) => {
     return {
-        name: setup.name,
+        name: 'VS-Flow Showcase',
         header: {
-            icon: { tag: 'i', class: 'fas fa-rocket' },
+            icon: {
+                tag: 'img',
+                width: 20,
+                src: '/apps/@vs-flow/doc/latest/assets/favicon.png',
+            },
         },
         layout: ({ router }) => notebookPage('home.md', router, context),
-        routes: {
-            // Fill here to add children pages
-        },
     } as AppNav
 }
 
-export const title = 'Build Your Own Chapter: Starter Template'
+export const title = 'Short Showcase of Visual Studio Flow'
 
 // The cross link 'contribute' is referenced in the root 'src/app/links.json'
 export const abstract = `
-This chapter provides a starter template to help you create and publish your own contribution to the gallery.
-It demonstrates the minimal structure required for a chapter: navigation, metadata, Markdown rendering, etc.
-
-See the <cross-link target="contribute"></cross-link> page for step-by-step instructions on how to customize it and 
-share your own interactive scientific showcase
+This chapter provides a short showcase of Visual Studio Flow
 `

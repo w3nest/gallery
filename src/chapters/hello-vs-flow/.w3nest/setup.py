@@ -24,8 +24,13 @@ root_deps = root_pkg_json["webpm"]["dependencies"]
 # These dependencies are not included in the bundle
 # They are fetched from NPM for project setup, and from webpm for runtime linking.
 externals_deps = {
-    k: root_deps[k]
-    for k in ["@w3nest/webpm-client", "mkdocs-ts", "@mkdocs-ts/notebook"]
+    "@w3nest/webpm-client": root_deps["@w3nest/webpm-client"],
+    "mkdocs-ts": root_deps["mkdocs-ts"],
+    "@mkdocs-ts/notebook": root_deps["@mkdocs-ts/notebook"],
+    "rxjs": "^7.8.2",
+    "rx-vdom": "^0.1.8",
+    "@vs-flow/core": "^0.4.0",
+    "@vs-flow/flowchart-3d": "^0.4.0",
 }
 # These dependencies are included in the bundle
 in_bundle_deps = {}
