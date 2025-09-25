@@ -1,5 +1,7 @@
 # Utilities
 
+## Drawing
+
 This page collects **helper functions** for plotting quantum simulation results using either:
 
 * <ext-link target="tdse-1d.d3js">D3</ext-link> — for direct SVG-based rendering of potentials, eigenstates, 
@@ -205,3 +207,35 @@ function draw({ plot, state, update, coef, d3 }) {
 }  
 
 </js-cell> 
+
+## Misc
+
+
+The next helper facilitate displaying notifications:
+
+<js-cell>
+const notify = async ({title, view, done}) => {
+
+    const { WorkersPoolView } = await webpm.installViewsModule()
+    const { rxjs } = await webpm.install({
+        esm:[
+            'rxjs#^7.5.6 as rxjs'
+        ]
+    })
+    const done$ = new rxjs.Subject()
+    Views.notify({
+        content: {
+            tag: 'div',
+            class: 'p-3',
+            children:[
+                { tag: 'div', innerText: title},
+                view
+            ]        
+        },
+        level: 'info',
+        done$
+    })
+    await done
+    done$.next(true)
+}
+</js-cell>

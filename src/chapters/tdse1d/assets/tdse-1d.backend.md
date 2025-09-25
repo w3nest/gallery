@@ -121,7 +121,7 @@ const scenarios = {
             gaussianWell({ depth: 1e4, mean: 0.25, sigma: 0.1 })(x) +
             gaussianWell({ depth: 3e4, mean: 0.6, sigma: 0.1 })(x),
         tFinal: 0.05,
-        dt: 0.0001,
+        dt: 0.0002,
         yScaleTDSE: 3,
         psi0: {
             x0: 0.2,

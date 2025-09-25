@@ -66,7 +66,7 @@ export const navigation = async ({
                 },
             },
             '/utils': {
-                name: 'Drawing Utils',
+                name: 'Utils',
                 header: {
                     icon: { tag: 'i', class: 'fas fa-tools' },
                 },

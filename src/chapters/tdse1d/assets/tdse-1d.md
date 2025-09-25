@@ -29,13 +29,11 @@ a library for reactive programming.
 The following cell installs the required dependencies within a worker pool:
 
 <js-cell>
-const { rxjs, d3 } = await webpm.install({
-    esm:[
-        'rxjs#^7.5.6 as rxjs', 
-        'd3#^7.7.0 as d3'
-    ]
-})
-const { WorkersPool } = await webpm.installWorkersPoolModule()
+const [{ WorkersPool }, { WorkersPoolView }, utils] = await Promise.all([
+    webpm.installWorkersPoolModule(),
+    webpm.installViewsModule(),
+    await load("/tdse-1d/utils"),
+])
 const pyPool = new WorkersPool({
     install:{
         pyodide: {
@@ -45,28 +43,13 @@ const pyPool = new WorkersPool({
     },
     pool: { startAt: 1, stretchTo: 1 }
 })
-const { initChart, plot } = await load("/tdse-1d/utils")
-const { WorkersPoolView } = await webpm.installViewsModule()
 
 const pyPoolView = new WorkersPoolView({ workersPool: pyPool  })
-display(pyPoolView)
-
-const done$ = new rxjs.Subject()
-Views.notify({
-    content: {
-        tag: 'div',
-        class: 'p-3',
-        children:[
-            { tag: 'div', innerText: 'Setup python runtime in Worker.'},
-            pyPoolView
-        ]        
-    },
-    level: 'info',
-    done$
+await utils.notify({ 
+    title:'Install Python Runtime in Worker', 
+    view: pyPoolView, 
+    done: pyPool.ready()
 })
-
-await pyPool.ready()
-done$.next(true)
 </js-cell>
 
 <note level="hint">
@@ -180,39 +163,52 @@ const grid = Array.from({ length: N }, (_, i) => i / (N - 1))
 The next cell defines different potential energy profiles for the 1D Time Dependent Schrödinger Equation (TDSE).
 The user can select between a harmonic potential, a single Gaussian well, or a double Gaussian well. 
 These potentials are defined using simple mathematical expressions and can be used to study the behavior of 
-quantum particles in different fields.
+quantum particles in different fields. We also adjust here the time step for each scenario.
 
 
 <js-cell>
+const { rxjs } = await webpm.install({
+    esm:['rxjs#^7.5.6 as rxjs']
+})
+
 const gaussianWell = ({ depth, mean, sigma }) => {
     return (x) =>
         depth * (1 - Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(sigma, 2))))
 }
 
 const scenariosEpot = {
-    harmonic: (x) => 1e4 * (x - 0.5) ** 2,
-    singleWell:  gaussianWell({ depth: 5e3, mean: 0.5, sigma: 0.15 }),
-    doubleWell: (x) =>
-        gaussianWell({ depth: 1e4, mean: 0.39, sigma: 0.1 })(x) +
-        gaussianWell({ depth: 2e4, mean: 0.7, sigma: 0.1 })(x),
+    harmonic: { 
+        dt: 2, 
+        V: (x) => 1e4 * (x - 0.5) ** 2 
+    },
+    singleWell: {
+        dt: 1.3, 
+        V: gaussianWell({ depth: 5e3, mean: 0.5, sigma: 0.15 })
+    },
+    doubleWell: { 
+        dt: 1, 
+        V: (x) =>
+            gaussianWell({ depth: 1e4, mean: 0.39, sigma: 0.1 })(x) +
+            gaussianWell({ depth: 2e4, mean: 0.7, sigma: 0.1 })(x),
+    }
 }
 const dropDown = new Views.Select({items:scenariosEpot, selected:'harmonic'})
 display(dropDown)
-const epot = dropDown.value$.pipe(
-    rxjs.map( epotFct => grid.map(epotFct) )
+const scenario = dropDown.value$.pipe(
+    rxjs.map( scenario => ({dt: scenario.dt, grid:grid.map(scenario.V)}) )
 )
-display(epot)
+display(scenario)
 </js-cell>
 
 The next cell reacts to the current scenario selection from the dropdown and triggers the computations of the 
 eigenstates and eigenvalues:
 
-<worker-cell mode="python" workers-pool="pyPool" captured-in="epot" captured-out="eigen_resp">
+<worker-cell mode="python" workers-pool="pyPool" captured-in="scenario" captured-out="eigen_resp">
 
-h_mat = hamiltonian_matrix(np.array(epot))
+h_mat = hamiltonian_matrix(np.array(scenario.grid))
 eigen_vals, eigen_states = compute_eigen(h_mat)
 eigen_resp = {
-    "epot":epot,
+    "scenario":scenario,
     "eigen_states": eigen_states.T,
     "eigen_vals": eigen_vals,
     "states": [
@@ -226,6 +222,10 @@ The `eigen_resp` variable is captured as output (it emits new value each time th
 and used in the following cell to plot the results:
 
 <js-cell>
+const { d3 } = await webpm.install({
+    esm:[ 'd3#^7.7.0 as d3' ]
+})
+
 const content = {
     tag: 'div',
     class: 'h-100 w-100 d-flex flex-column',
@@ -238,13 +238,13 @@ const content = {
                     tag: 'div',
                     class: 'flex-grow-1 w-100',
                     connectedCallback: (element) => { 
-                        const chart = initChart(element, grid, resp.epot, d3) 
+                        const chart = utils.initChart(element, grid, resp.scenario.grid, d3) 
                         const pdf0Max = d3.max(resp.states[0].pdf)
                         const deltaE0 = chart.yScale(resp.states[1].energy) - chart.yScale(resp.states[0].energy)
                         const pdfScale = d3.scaleLinear().domain([0, pdf0Max]).range([0, deltaE0])
                         resp.states.forEach((state) => {
                             if (state.energy < chart.Vmax) {
-                                plot({ chart, state, update: false, pdfScale, coef: 1, d3 })
+                                utils.plot({ chart, state, update: false, pdfScale, coef: 1, d3 })
                             }
                         })
                     }
@@ -397,15 +397,17 @@ potential and its precomputed eigenstates and eigenvalues.
 New inputs are emitted every `100ms`, including an attribute `t` that defines the expected evolution time.
 
 <js-cell>
+
+
 const inputs = eigen_resp.pipe(
     rxjs.switchMap( (resp) => {
         return rxjs.timer(0,100).pipe(
             rxjs.map((c) => {
                 return {
-                    epot: resp.epot,
+                    epot: resp.scenario.grid,
                     eigen_states: resp.eigen_states,
                     eigen_values: resp.eigen_vals,
-                    t: 0.0003 * c,
+                    t: resp.scenario.dt * 0.0003 * c,
                     psi0: {
                         x0: 0.35,
                         sigma: 0.05,
@@ -458,16 +460,16 @@ const content2 = {
                     tag: 'div',
                     class: 'flex-grow-1 w-100',
                     connectedCallback: (element) => { 
-                        const chart = initChart(element, grid, eigen_resp.epot, d3) 
+                        const chart = utils.initChart(element, grid, eigen_resp.scenario.grid, d3) 
                         const pdf0Max = d3.max(eigen_resp.states[0].pdf)
                         const deltaE0 = chart.yScale(eigen_resp.states[1].energy) - chart.yScale(eigen_resp.states[0].energy)
                         const pdfScale = d3.scaleLinear().domain([0, pdf0Max]).range([0, deltaE0])
                         eigen_resp.states.forEach((state) => {
                             if (state.energy < chart.Vmax) {
-                                plot({ chart, state, update: false, pdfScale, coef: 1, d3 })
+                                utils.plot({ chart, state, update: false, pdfScale, coef: 1, d3 })
                             }
                         })
-                        plot({ chart, state: state_resp, pdfScale, update: true, coef: 3, d3 })
+                        utils.plot({ chart, state: state_resp, pdfScale, update: true, coef: 3, d3 })
                     }
                 }
             }
