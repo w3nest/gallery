@@ -97,26 +97,3 @@ const LabelRange = ({ text, min, max, labelWidth }) => {
     };
 };
 </js-cell>
-
----
-
-
-## Notification
-
-This snippet defines a helper function for triggering installation progress notifications.  
-The notification is tied to the `InstallDoneEvent`, so it will automatically close once the installation completes.
-
-<js-cell>
-const notifyInstall = async (level, view) => {
-
-    const { rxjs } = await webpm.install({esm:['rxjs#^7.8.2 as rxjs']})
-    const done$ = view.eventsMgr.event$.pipe(
-        rxjs.filter( (ev) => ev.step === 'InstallDoneEvent')
-    )
-    Views.notify({
-        level: 'warning',
-        content: view,
-        done$
-    })
-}
-</js-cell>

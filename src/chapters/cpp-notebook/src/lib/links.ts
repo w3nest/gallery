@@ -21,10 +21,13 @@ export const links = {
         // 🔗 Cross-links: jump to other pages within the same gallery instance
         // Example: for a sub-page mounted at '/sub-page' under chapter 'template',
         // the key is 'template.sub-page', and the value points to its nav ID.
-        //[`${navId}.sub-page`]: `@nav[${navId}]/backend`,
+        [`${navId}.utils.label-range`]: `@nav[${navId}]/code-utils.label-range-input`,
     },
     extLinks: {
         'cpp-notebook.w3nest': '/apps/@w3nest/doc/latest',
+        armadillo: 'https://arma.sourceforge.net/',
+        'cpp-notebook.cpprun_backend':
+            '/apps/@mkdocs-ts/doc/latest?nav=/api/notebook/Interpreters/cpprun_backend',
     },
     githubLinks: {
         // 🐙 GitHub links: direct references to source files for this chapter

@@ -44,9 +44,16 @@ export const navigation = async ({
     } as AppNav
 }
 
-export const title = 'Short Showcase of MkDocs-TS notebook feature'
+export const title = 'Run C++ code in your Notebook'
 
 // The cross link 'contribute' is referenced in the root 'src/app/links.json'
 export const abstract = `
-This chapter provides a short showcase of MkDocs-TS notebook feature
+This notebook demonstrates how to run **C++ code interactively** inside a notebook environment, 
+and how to combine it with **JavaScript views** for visualization and parameter control.  
+
+As a practical example, we’ll build a projectile motion simulator that:
+- Performs the physics computation in C++  
+- Passes the results to JavaScript  
+- Visualizes the trajectory with interactive sliders and charts
+- Recomputes dynamically whenever parameters are updated
 `
