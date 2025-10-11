@@ -1,4 +1,4 @@
-import { fromMarkdown, MdWidgets } from 'mkdocs-ts'
+import { fromMarkdown, GlobalMarkdownViews, MdWidgets } from 'mkdocs-ts'
 import { Chapter } from './models'
 import setup from '../../package.json'
 import linksMap from './links.json'
@@ -9,6 +9,10 @@ import {
     templateLinksTs,
     templateSetupPy,
 } from './contribute-file-contents'
+
+import { getW3NestCookie } from '@w3nest/webpm-client'
+import { AnyVirtualDOM } from 'rx-vdom'
+import { LocalOnly } from './widgets/local-only'
 
 export const url = (restOfPath: string) => `../assets/${restOfPath}`
 
@@ -56,4 +60,14 @@ export function setupGlobalLinks(chapters: Chapter[]) {
             href: links.crossLinks[target] as string,
         }
     }
+}
+
+GlobalMarkdownViews.factory = {
+    ...GlobalMarkdownViews.factory,
+    localOnly: (): AnyVirtualDOM => {
+        if (getW3NestCookie().type === 'remote') {
+            return new LocalOnly()
+        }
+        return { tag: 'div' }
+    },
 }
