@@ -1,19 +1,24 @@
 
-# VS-Flow Showcase
+# <icon target="vsf"></icon> VS-Flow Showcase
+
+---
 
 This page showcases a short example of creation a low-code application using
-<ext-link target="vs-flow">Visual Studio Flow</ext-link>.
-It aims at illustrating important concepts, while not diving into details, this example is meant to inspire — 
-the full breakdown is in the dedicated <ext-link target="vs-flow/tuto">Tutorials</ext-link>.
+<ext-link target="hello-vs-flow.vs-flow">Visual Studio Flow</ext-link>.
+It aims at illustrating important concepts while not diving into details.
+For detailed explanations, visit the dedicated <ext-link target="hello-vs-flow.vs-flow-tuto">Tutorials</ext-link>.
 
 
-This project loads a 3D bunny mesh, applies **remeshing** and **smoothing** with <ext-link target="PMP">PMP</ext-link>, 
-and renders it in real time with <ext-link target="threeJs">Three.js</ext-link> — all in your browser, 
+This project loads a 3D bunny mesh, applies **remeshing** and **smoothing** with 
+<ext-link target="hello-vs-flow.PMP">PMP</ext-link>, 
+and renders it in real time with <ext-link target="hello-vs-flow.threeJs">Three.js</ext-link> — all in your browser, 
 GPU-accelerated, and orchestrated off the main thread.
+
+---
 
 ## Setup
 
-Let's import the core of vs-flow:
+Let's import the core of VS-Flow:
 
 <js-cell>
 const { vsf } = await webpm.install({
@@ -23,7 +28,7 @@ const { vsf } = await webpm.install({
 let project = new vsf.Projects.ProjectState()
 </js-cell>
 
-and imports some toolboxes:
+and add some toolboxes:
 
 <js-cell>
 
@@ -38,11 +43,11 @@ project =  await project.with({
 })
 </js-cell>
 
-<note level="question" title="Toolboxes?">
+<note level="question" title="Toolboxes">
 Toolboxes gathers modules, usually related to a given context, that can be used and connected in the project.
 </note>
 
-Let's also initialize a workers pool to executed computations off the main thread:
+Let's also initialize a workers pool to execute computations off the main thread:
 
 <js-cell>
 project =  await project.with({
@@ -54,6 +59,7 @@ project =  await project.with({
 })
 </js-cell>
 
+---
 
 ## Macro definition
 
@@ -93,6 +99,7 @@ const macroRemesh = {
 }
 </js-cell>
 
+---
 
 ## Full Workflow
 
@@ -158,7 +165,7 @@ Other orchestration strategies are also supported, such as:
 </note>
 
 
-**View and interact**
+### View and Interaction
 
 Every module in the graph can expose views (shown as <i class="fas fa-eye"></i> in the flowchart rendered). 
 Here we manually combine the **viewer** and **settings panel** in a layout; a spinner also feedbacks about running
@@ -193,7 +200,7 @@ display(view)
 </cell-output>
 
 
-**Pimp Your FlowChart**
+### Pimp Your FlowChart
 
 The 3D flowchart can be customized at multiple levels.
 Here’s an example where we organize modules into two layers — **Data** and **View** — and add annotations that 
@@ -235,7 +242,9 @@ display(project)
 <cell-output cell-id='flowchart' defaultStyle="aspect-ratio:1" full-screen="true">
 </cell-output>
 
-**Summary**
+---
+
+## Summary
 
 In just a few lines, we built a real-time, browser-native, GPU-powered 3D mesh processing tool — complete with UI, 
 threading, and C++ compute — all in a declarative, modular workflow.

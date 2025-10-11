@@ -25,7 +25,10 @@ export const links = {
     },
     extLinks: {
         // 🌍 External links: reference third-party sites, libraries, or docs
-        //[`${navId}.mkdocs-ts`]: '/apps/@w3nest/doc/latest',
+        [`${navId}.vs-flow`]: '/apps/@vs-flow/doc/latest',
+        [`${navId}.vs-flow-tuto`]: '/apps/@vs-flow/doc/latest?nav=/tutorials',
+        [`${navId}.PMP`]: 'https://www.pmp-library.org/',
+        [`${navId}.threeJs`]: 'https://threejs.org/',
     },
     githubLinks: {
         // 🐙 GitHub links: direct references to source files for this chapter

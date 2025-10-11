@@ -1,5 +1,5 @@
-import { fromMarkdown } from 'mkdocs-ts'
-import { resolveUrlWithFP } from '@w3nest/webpm-client'
+import { fromMarkdown, IconFactory } from 'mkdocs-ts'
+import { getUrlBase, resolveUrlWithFP } from '@w3nest/webpm-client'
 import setup from '../../package.json'
 import { navId } from './links'
 
@@ -35,3 +35,13 @@ export function fromMd(file: string) {
         placeholders,
     })
 }
+
+IconFactory.register({
+    vsf: {
+        tag: 'img',
+        style: {
+            height: '1.5em',
+        },
+        src: getUrlBase(setup.name, setup.version) + '/assets/logo.png',
+    },
+})
