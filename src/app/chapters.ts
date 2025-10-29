@@ -8,7 +8,7 @@
 export const chapterInputs = {
     'template': '@w3gallery/template#^0.1.0-wip',
     'hello-vs-flow': '@w3gallery/hello-vs-flow#^0.1.0-wip',
-    'openalea': '@w3gallery/openalea#^0.1.0-wip',
+    'openalea': '@w3gallery/openalea#^0.1.0',
     'tdse-1d': '@w3gallery/tdse-1d#^0.1.0-wip',
     'cpp-notebook': '@w3gallery/cpp-notebook#^0.1.0-wip',
 }
