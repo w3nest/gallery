@@ -1,4 +1,4 @@
-import { ContextTrait, DefaultLayout, Router } from 'mkdocs-ts'
+import { ContextTrait, DefaultLayout, parseMd, Router } from 'mkdocs-ts'
 import { DisplayFactory, Views, NotebookPage } from '@mkdocs-ts/notebook'
 import {
     Immutable,
@@ -140,27 +140,13 @@ export const notebookPage = async (
             router,
             options: notebookOptions,
             displayFactory,
-            //initialScope: initialScope(router, Notebook),
+            initialScope: {
+                const: {
+                    BASE_URL: webpm.getUrlBase(pkgJson.name, pkgJson.version),
+                },
+                let: {},
+            },
         },
         context,
     )
 }
-
-// export const notebookPage = (
-//     target: string,
-//     router: Router,
-//     context: ContextTrait,
-// ) => {
-//     return new NotebookPage(
-//         {
-//             url: url(target),
-//             router,
-//             options: notebookOptions,
-//             initialScope: {
-//                 const: {},
-//                 let: {},
-//             },
-//         },
-//         context,
-//     )
-// }

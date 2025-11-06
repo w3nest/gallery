@@ -29,6 +29,8 @@ export const links = {
         // 🌍 External links: reference third-party sites, libraries, or docs
         [`${navId}.openalea`]: 'https://openalea.readthedocs.io/en/latest/',
         [`${navId}.vs-flow`]: '/apps/@vs-flow/doc/latest',
+        [`${navId}.three`]: 'https://threejs.org/',
+        [`${navId}.three.mesh`]: 'https://threejs.org/docs/#Mesh',
     },
     githubLinks: {
         // 🐙 GitHub links: direct references to source files for this chapter

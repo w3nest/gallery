@@ -3,26 +3,18 @@
 
 This page showcases a short example to create a multiscale tree graph (MTG).
 
----
-
-## Setup
-
-Let's install the `openalea_interpreter`, it is a python interpreter featuring core modules of Openalea:
+It runs using a backend python interpreter featuring a dedicated Openalea environment:
 
 <js-cell>
 const openalea = await installInterpreter({
-    backend: 'openalea_interpreter#^0.1.0',
+    backend: 'pyrun_backend#^0.2.2',
+    dockerfile: `${BASE_URL}/assets/openalea.Dockerfile`,
     buildWith: { mambaModules:'oawidgets openalea.weberpenn' },
     display,
     notification: true
 })
 display(openalea)
 </js-cell>
-
-<note level="warning" title="Important">
-The `openalea_interpreter` comes only with `openalea.plantgl` & `openalea.mtg` modules, additional requirements should
-be provided in its build configuration as illustrated above.
-</note>
 
 ---
 
